@@ -19,7 +19,8 @@ import {
   Play,
   Smartphone,
   Tablet,
-  AlertTriangle
+  AlertTriangle,
+  RefreshCw
 } from 'lucide-react';
 
 const shuffle = <T,>(array: T[]): T[] => {
@@ -29,6 +30,23 @@ const shuffle = <T,>(array: T[]): T[] => {
     [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
   }
   return newArray;
+};
+
+// Helper to log broken songs
+const logBrokenSong = (song: Song) => {
+  try {
+    const raw = localStorage.getItem('chrono_broken_songs');
+    const list: Song[] = raw ? JSON.parse(raw) : [];
+    
+    // Check if already exists
+    if (!list.find(s => s.id === song.id)) {
+      const newList = [...list, song];
+      localStorage.setItem('chrono_broken_songs', JSON.stringify(newList));
+      console.log('Logged broken song:', song.title);
+    }
+  } catch (e) {
+    console.error('Failed to log broken song', e);
+  }
 };
 
 export default function App() {
@@ -94,6 +112,30 @@ export default function App() {
     setIsPlaying(true);
   };
 
+  const drawNewCard = () => {
+    if (gameState.deck.length === 0) {
+      alert("Pakka on tyhjä! Peliä ei voi jatkaa.");
+      return;
+    }
+
+    // Current broken card is already logged in handlePlayError
+    
+    const nextCard = gameState.deck[0];
+    const newDeck = gameState.deck.slice(1);
+
+    setPlayError(false);
+    // Try to play the new card immediately
+    setIsPlaying(true);
+    
+    setGameState(prev => ({
+      ...prev,
+      deck: newDeck,
+      currentCard: nextCard,
+      activePlayerSlot: null,
+      challenger: null
+    }));
+  };
+
   const togglePlayback = () => {
     setIsPlaying(!isPlaying);
   };
@@ -101,6 +143,10 @@ export default function App() {
   const handlePlayError = () => {
     setPlayError(true);
     setIsPlaying(false);
+    // Log the error for the user to export later
+    if (gameState.currentCard) {
+      logBrokenSong(gameState.currentCard);
+    }
   };
 
   const checkSlotCorrect = (song: Song, timeline: Song[], slotIndex: number | null): boolean => {
@@ -245,7 +291,7 @@ export default function App() {
         {/* HUD */}
         <header className="shrink-0 flex justify-between items-start gap-4 mb-4 border-b-[4px] border-black pb-2">
           <div>
-            <h2 className="text-2xl font-bold tracking-tighter">CHRONOBEATS // V2.0</h2>
+            <h2 className="text-2xl font-bold tracking-tighter">CHRONOBEATS // GOLDEN ERA</h2>
             <div className="flex gap-2 mt-1">
               <span className="bg-black text-white px-2 text-xs font-bold uppercase py-0.5">Vuorossa</span>
               <span className="border border-black px-2 text-xs font-bold uppercase py-0.5">{currentPlayer.name}</span>
@@ -316,8 +362,19 @@ export default function App() {
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] z-50 bg-white border-2 border-black shadow-hard p-4 flex flex-col items-center text-center gap-2">
                          <AlertTriangle className="w-8 h-8 text-red-600" />
                          <span className="text-xs font-bold uppercase">Toisto estetty (YouTube)</span>
-                         <span className="text-[10px]">Video-omistaja on rajoittanut upotuksen.</span>
-                         <div className="text-[10px] bg-stone-100 p-1 border border-black mt-1">Arvatkaa sokkona!</div>
+                         <span className="text-[10px] mb-2">Video-omistaja on rajoittanut upotuksen.</span>
+                         
+                         <button 
+                            onClick={drawNewCard}
+                            className="bg-black text-white px-4 py-2 font-bold text-xs border-2 border-black hover:bg-white hover:text-black transition-colors flex items-center gap-2"
+                         >
+                            <RefreshCw className="w-4 h-4" />
+                            NOSTA UUSI KORTTI
+                         </button>
+
+                         <div className="text-[10px] bg-stone-100 p-1 border border-black mt-2">
+                           Biisi merkitty huoltolistaan.
+                         </div>
                     </div>
                   )}
                 </div>
