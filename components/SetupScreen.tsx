@@ -70,6 +70,7 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({ onStartGame }) => {
           <h2 className="text-2xl font-bold font-serif mb-6 flex items-center gap-2">
             <Wrench className="w-6 h-6" /> Huoltokonsoli
           </h2>
+          <p className="text-sm mb-4">Tässä listassa ovat biisit, joiden toisto epäonnistui edellisen pelin aikana.</p>
 
           <div className="bg-stone-100 border-2 border-black p-4 mb-4 h-64 overflow-y-auto font-mono text-xs">
             {brokenSongs.length === 0 ? (
@@ -91,12 +92,13 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({ onStartGame }) => {
               disabled={brokenSongs.length === 0}
               className="flex-1 bg-black text-white p-3 font-bold border-2 border-black disabled:opacity-50 flex items-center justify-center gap-2"
             >
-              <Copy className="w-4 h-4" /> Kopioi lista
+              <Copy className="w-4 h-4" /> Kopioi lista koodarille
             </button>
             <button 
               onClick={clearBrokenList}
               disabled={brokenSongs.length === 0}
               className="px-4 bg-white text-black p-3 font-bold border-2 border-black hover:bg-red-100 disabled:opacity-50"
+              title="Tyhjennä lista"
             >
               <Trash2 className="w-4 h-4" />
             </button>
@@ -109,16 +111,15 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({ onStartGame }) => {
   return (
     <div className="max-w-xl mx-auto w-full p-6">
       <div className="bg-white border-2 border-black shadow-hard-lg p-8 mb-8 relative">
-        {/* Maintenance Button */}
+        {/* Maintenance Button - NOW VISIBLE */}
         <button 
           onClick={() => setShowMaintenance(true)}
-          className="absolute top-2 right-2 p-2 opacity-20 hover:opacity-100 transition-opacity"
-          title="Huoltokonsoli (Vialliset biisit)"
+          className="absolute top-0 right-0 m-4 flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest border border-black px-2 py-1 hover:bg-black hover:text-white transition-colors"
         >
-          <Wrench className="w-4 h-4" />
+          <Wrench className="w-3 h-3" /> Huolto
         </button>
 
-        <h1 className="text-4xl font-serif font-black text-center mb-2 uppercase tracking-tight">Chrono<br/>Beats</h1>
+        <h1 className="text-4xl font-serif font-black text-center mb-2 uppercase tracking-tight mt-4">Chrono<br/>Beats</h1>
         <p className="text-center font-mono text-sm border-y-2 border-black py-2 mb-6 uppercase">
           Golden Era Edition
         </p>

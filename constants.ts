@@ -38,8 +38,8 @@ export const SONGS: Song[] = [
   { id: '70s-6', artist: 'Village People', title: 'Y.M.C.A.', year: 1978, youtubeId: 'CS9OO0S5w2k', startAt: 0 },
   { id: '70s-7', artist: 'Gloria Gaynor', title: 'I Will Survive', year: 1978, youtubeId: 'ARt9HV9T0w8', startAt: 0 },
   { id: '70s-8', artist: 'Fleetwood Mac', title: 'Go Your Own Way', year: 1977, youtubeId: '6ul-cZyuYq4', startAt: 0 },
-  { id: '70s-9', artist: 'Donna Summer', title: 'I Feel Love', year: 1977, youtubeId: 'Nm-ISatLDG0', startAt: 0 },
-  { id: '70s-10', artist: 'Boney M.', title: 'Rasputin', year: 1978, youtubeId: 'kvDMlk3kSYg', startAt: 0 },
+  // POISTETTU: Donna Summer (70s-9)
+  // POISTETTU: Boney M. (70s-10)
   { id: '70s-11', artist: 'Led Zeppelin', title: 'Stairway to Heaven', year: 1971, youtubeId: 'QkF3oxziUI4', startAt: 0 },
   { id: '70s-12', artist: 'Elton John', title: 'Rocket Man', year: 1972, youtubeId: 'DtVBCG6ThDk', startAt: 0 },
   { id: '70s-13', artist: 'Deep Purple', title: 'Smoke on the Water', year: 1972, youtubeId: 'zUwEIt9ez7M', startAt: 0 },
@@ -49,7 +49,7 @@ export const SONGS: Song[] = [
   { id: '70s-17', artist: 'David Bowie', title: 'Heroes', year: 1977, youtubeId: '44FSlstp6uY', startAt: 0 },
   { id: '70s-18', artist: 'KC & The Sunshine Band', title: 'That’s the Way (I Like It)', year: 1975, youtubeId: 'R3k6vXQn9r8', startAt: 0 },
   { id: '70s-19', artist: 'Lynyrd Skynyrd', title: 'Free Bird', year: 1973, youtubeId: 'QxIWDmmqZzY', startAt: 0 },
-  { id: '70s-20', artist: 'Rod Stewart', title: 'Maggie May', year: 1971, youtubeId: 'Vn5R3lYhLnQ', startAt: 0 },
+  // POISTETTU: Rod Stewart (70s-20)
 
   // --- 60-LUKU ---
   { id: '60s-1', artist: 'Creedence Clearwater Revival', title: 'Fortunate Son', year: 1969, youtubeId: 'ZWijx_AgPiA', startAt: 0 },
@@ -60,14 +60,14 @@ export const SONGS: Song[] = [
   { id: '60s-6', artist: 'The Beach Boys', title: 'Good Vibrations', year: 1966, youtubeId: 'apBWI6xrbLY', startAt: 0 },
   { id: '60s-7', artist: 'Jimi Hendrix', title: 'All Along the Watchtower', year: 1968, youtubeId: 'TLV4_xaYynY', startAt: 0 },
   { id: '60s-8', artist: 'Elvis Presley', title: 'Suspicious Minds', year: 1969, youtubeId: 'RxOBOhRECoo', startAt: 0 },
-  { id: '60s-9', artist: 'Steppenwolf', title: 'Born to be Wild', year: 1968, youtubeId: '5UWRyjVyAm8', startAt: 0 },
+  // POISTETTU: Steppenwolf (60s-9)
   { id: '60s-10', artist: 'The Beatles', title: 'Come Together', year: 1969, youtubeId: '45cYwDMibGo', startAt: 0 },
   { id: '60s-11', artist: 'The Kinks', title: 'You Really Got Me', year: 1964, youtubeId: 'fTTsY-oz6Go', startAt: 0 },
   { id: '60s-12', artist: 'Bob Dylan', title: 'Like a Rolling Stone', year: 1965, youtubeId: 'IwOfCgkyEj0', startAt: 0 },
   { id: '60s-13', artist: 'The Beatles', title: 'Hey Jude', year: 1968, youtubeId: 'A_MjCqQoLLA', startAt: 0 },
   { id: '60s-14', artist: 'The Doors', title: 'Light My Fire', year: 1967, youtubeId: 'mbj1RFaoyLk', startAt: 0 },
   { id: '60s-15', artist: 'The Who', title: 'My Generation', year: 1965, youtubeId: 'qEXoYNqIvvI', startAt: 0 },
-  { id: '60s-16', artist: 'The Supremes', title: 'You Can’t Hurry Love', year: 1966, youtubeId: 'V2c5-9z3g_0', startAt: 0 },
+  // POISTETTU: The Supremes (60s-16)
   { id: '60s-17', artist: 'Simon & Garfunkel', title: 'The Sound of Silence', year: 1965, youtubeId: '4zLfCnGVeL4', startAt: 0 },
   { id: '60s-18', artist: 'Van Morrison', title: 'Brown Eyed Girl', year: 1967, youtubeId: 'UfmkgQRmmeE', startAt: 0 },
   { id: '60s-19', artist: 'Otis Redding', title: '(Sittin’ On) The Dock of the Bay', year: 1968, youtubeId: 'rTVjnBo96Ug', startAt: 0 },
