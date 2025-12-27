@@ -37,9 +37,19 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({ onStartGame }) => {
     }
   };
 
+  const updatePlayerName = (index: number, value: string) => {
+    const updatedNames = [...names];
+    updatedNames[index] = value;
+    setNames(updatedNames);
+  };
+
   const handleStart = () => {
-    if (names.length >= 2) {
-      onStartGame(names);
+    // Filter out empty names
+    const validNames = names.filter(n => n.trim().length > 0);
+    if (validNames.length >= 2) {
+      onStartGame(validNames);
+    } else {
+        alert("Tarvitaan vähintään kaksi pelaajaa, joilla on nimet!");
     }
   };
 
@@ -121,7 +131,7 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({ onStartGame }) => {
 
         <h1 className="text-4xl font-serif font-black text-center mb-2 uppercase tracking-tight mt-4">Chrono<br/>Beats</h1>
         <p className="text-center font-mono text-sm border-y-2 border-black py-2 mb-6 uppercase">
-          Golden Era Edition
+          Vinyl Edition
         </p>
 
         <div className="space-y-4 mb-8">
@@ -133,11 +143,20 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({ onStartGame }) => {
           <div className="space-y-3">
             {names.map((name, index) => (
               <div key={index} className="flex items-center justify-between bg-stone-100 p-2 border-2 border-black shadow-hard-sm">
-                <span className="font-mono font-bold">#{index + 1} {name}</span>
+                <div className="flex items-center gap-2 w-full">
+                    <span className="font-mono font-bold shrink-0 text-stone-400">#{index + 1}</span>
+                    <input 
+                        type="text" 
+                        value={name} 
+                        onChange={(e) => updatePlayerName(index, e.target.value)}
+                        className="bg-transparent border-b-2 border-transparent focus:border-black focus:outline-none w-full font-mono font-bold"
+                        placeholder={`Pelaaja ${index + 1}`}
+                    />
+                </div>
                 {names.length > 2 && (
                   <button 
                     onClick={() => removePlayer(index)}
-                    className="p-1 hover:bg-black hover:text-white transition-colors"
+                    className="p-1 hover:bg-black hover:text-white transition-colors ml-2"
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -153,7 +172,7 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({ onStartGame }) => {
                 value={newName}
                 onChange={(e) => setNewName(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && addPlayer()}
-                placeholder="Syötä nimi..."
+                placeholder="Lisää uusi pelaaja..."
                 className="flex-1 bg-white border-2 border-black p-2 font-mono focus:outline-none focus:shadow-hard-sm transition-shadow"
               />
               <button 

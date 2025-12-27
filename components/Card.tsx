@@ -10,6 +10,44 @@ interface CardProps {
   isPlaying?: boolean;
 }
 
+// Custom Vinyl Component for realistic look and visible rotation
+const VinylRecord = ({ className, isPlaying }: { className: string, isPlaying: boolean }) => (
+  <div 
+    className={`${className} rounded-full bg-zinc-900 relative flex items-center justify-center shadow-xl overflow-hidden border border-zinc-800 ${isPlaying ? 'animate-spin' : ''}`}
+    style={{ animationDuration: '3s', animationTimingFunction: 'linear' }}
+  >
+      {/* Grooves - Repeating radial gradient */}
+      <div className="absolute inset-0 rounded-full opacity-40" 
+           style={{
+             background: 'repeating-radial-gradient(#111 0, #111 2px, #333 3px, #333 4px)'
+           }}
+      ></div>
+      
+      {/* Shine/Reflection - Conic gradient to ensure rotation is visible */}
+      <div className="absolute inset-0 rounded-full opacity-50 mix-blend-overlay"
+           style={{
+             background: 'conic-gradient(from 45deg, transparent 0%, rgba(255,255,255,0.9) 15%, transparent 30%, transparent 180%, rgba(255,255,255,0.9) 195%, transparent 210%)'
+           }}
+      ></div>
+
+      {/* Label */}
+      <div className="absolute w-[35%] h-[35%] bg-amber-600 rounded-full border-[3px] border-black/80 flex items-center justify-center shadow-inner z-10">
+          {/* Center Hole */}
+          <div className="w-[15%] h-[15%] bg-white rounded-full border border-black/20"></div>
+          
+          {/* Label Text to help visualize rotation */}
+          <div className="absolute w-full h-full flex items-center justify-center">
+             <div className="w-full text-[8px] md:text-[10px] text-center font-mono text-black font-black tracking-widest opacity-70" style={{ transform: 'translateY(-25%) scale(0.6)' }}>
+                VINYL
+             </div>
+             <div className="absolute w-full text-[8px] md:text-[10px] text-center font-mono text-black font-black tracking-widest opacity-70" style={{ transform: 'translateY(25%) scale(0.6) rotate(180deg)' }}>
+                EDITION
+             </div>
+          </div>
+      </div>
+  </div>
+);
+
 export const Card: React.FC<CardProps> = ({ song, revealed = false, className = '', variant = 'default', isPlaying = false }) => {
   const isSmall = variant === 'small';
   const isTimeline = variant === 'timeline';
@@ -33,7 +71,8 @@ export const Card: React.FC<CardProps> = ({ song, revealed = false, className = 
     backface-hidden
   `;
 
-  const iconSize = isLarge ? 'w-12 h-12' : (isTimeline ? 'w-5 h-5' : 'w-8 h-8');
+  // Define icon size separately
+  const iconSize = isLarge ? 'w-40 h-40' : (isTimeline ? 'w-8 h-8' : 'w-20 h-20');
   const textSize = isLarge ? 'text-2xl' : (isTimeline ? 'text-[10px] leading-3' : 'text-xs');
   const yearSize = isLarge ? 'text-xl' : (isTimeline ? 'text-[10px]' : 'text-xs');
 
@@ -50,22 +89,20 @@ export const Card: React.FC<CardProps> = ({ song, revealed = false, className = 
           {/* Inner dashed border */}
           <div className="absolute inset-1 border-2 border-black/10 border-dashed pointer-events-none"></div>
 
-          <div className="mb-1 z-10">
-            <HelpCircle 
-              className={`
-                ${iconSize} 
-                ${isPlaying ? 'animate-[spin_3s_linear_infinite]' : ''}
-              `} 
-            />
-          </div>
-
-          <div className="flex-1 flex flex-col justify-center w-full z-10">
+          <div className="flex-1 flex flex-col justify-center items-center w-full z-10 relative">
+             {/* Large Vinyl Record Icon for Hidden state */}
+             {isTimeline ? (
+               <VinylRecord className={iconSize} isPlaying={false} />
+             ) : (
+               <VinylRecord className={iconSize} isPlaying={isPlaying} />
+             )}
+             
             {!isTimeline && (
-              <div className="border-y border-black py-2 my-2 text-[10px] font-bold tracking-widest bg-stone-100/50">
+              <div className="absolute bottom-4 border-y border-black py-1 px-4 text-[10px] font-bold tracking-widest bg-stone-100/80 shadow-sm z-20">
                 SALATTU
               </div>
             )}
-            {isTimeline && <div className="text-[8px] font-bold tracking-widest opacity-50">???</div>}
+            {isTimeline && <div className="text-[8px] font-bold tracking-widest opacity-50 mt-1">???</div>}
           </div>
 
           <div className={`w-full mt-auto border-t-[3px] border-black pt-1 font-bold z-10 ${yearSize}`}>
@@ -80,7 +117,7 @@ export const Card: React.FC<CardProps> = ({ song, revealed = false, className = 
 
           {!isTimeline && (
              <div className="mb-2 z-10">
-               <Disc className={iconSize} />
+               <Disc className={isLarge ? 'w-12 h-12' : 'w-8 h-8'} />
              </div>
           )}
 

@@ -308,7 +308,7 @@ export default function App() {
         {/* HUD - Compact Header */}
         <header className="shrink-0 flex justify-between items-center gap-4 mb-2 border-b-[3px] border-black pb-2 h-16">
           <div className="flex flex-col">
-            <h2 className="text-xl font-bold tracking-tighter leading-none">CHRONOBEATS // GE</h2>
+            <h2 className="text-xl font-bold tracking-tighter leading-none">CHRONOBEATS // VINYL EDITION</h2>
             <div className="flex gap-2 mt-1">
               <span className="bg-black text-white px-2 text-[10px] font-bold uppercase py-0.5">Vuorossa</span>
               <span className="border border-black px-2 text-[10px] font-bold uppercase py-0.5">{currentPlayer.name}</span>
