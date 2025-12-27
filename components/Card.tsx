@@ -48,6 +48,38 @@ const VinylRecord = ({ className, isPlaying }: { className: string, isPlaying: b
   </div>
 );
 
+// New Tone Arm Component
+const ToneArm = ({ isPlaying }: { isPlaying: boolean }) => (
+  <div className="absolute inset-0 pointer-events-none z-30 overflow-hidden rounded-xl">
+     {/* Pivot Base (Top Right) */}
+     <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-stone-300 border-2 border-black shadow-md flex items-center justify-center z-20">
+        <div className="w-2 h-2 rounded-full bg-stone-600 border border-black"></div>
+        <div className="absolute -bottom-1 w-4 h-4 bg-stone-400 -z-10 rounded-full"></div>
+     </div>
+     
+     {/* The Arm Assembly */}
+     {/* We rotate the whole arm from the pivot point */}
+     <div 
+       className={`
+         absolute top-7 right-7 w-20 h-40 origin-top-right transition-transform duration-1000 ease-in-out
+         ${isPlaying ? 'rotate-[-25deg]' : 'rotate-[-55deg]'}
+       `}
+     >
+        {/* Main Arm Shaft */}
+        <div className="absolute right-0 top-0 w-2 h-28 bg-stone-400 border-x border-black shadow-sm origin-top"></div>
+        
+        {/* Counterweight (visual only, near pivot) */}
+        <div className="absolute right-[-2px] top-[-5px] w-3 h-6 bg-stone-700 border border-black rounded-sm"></div>
+
+        {/* HeadShell / Cartridge (At the end) */}
+        <div className="absolute right-[-4px] top-28 w-5 h-8 bg-black rounded-sm border border-stone-600 shadow-md">
+           {/* Needle hint */}
+           <div className="absolute bottom-[-2px] left-1/2 -translate-x-1/2 w-0.5 h-1 bg-white"></div>
+        </div>
+     </div>
+  </div>
+);
+
 export const Card: React.FC<CardProps> = ({ song, revealed = false, className = '', variant = 'default', isPlaying = false }) => {
   const isSmall = variant === 'small';
   const isTimeline = variant === 'timeline';
@@ -90,6 +122,11 @@ export const Card: React.FC<CardProps> = ({ song, revealed = false, className = 
           {/* Inner dashed border */}
           <div className="absolute inset-1 border-2 border-black/10 border-dashed pointer-events-none"></div>
 
+          {/* Tone Arm - Only visible on Large (Playing) cards and NOT when revealed */}
+          {!isTimeline && !isSmall && (
+            <ToneArm isPlaying={isPlaying} />
+          )}
+
           <div className="flex-1 flex flex-col justify-center items-center w-full z-10 relative">
              {/* Large Vinyl Record Icon for Hidden state */}
              {isTimeline ? (
@@ -99,7 +136,8 @@ export const Card: React.FC<CardProps> = ({ song, revealed = false, className = 
              )}
              
             {!isTimeline && (
-              <div className="absolute bottom-4 border-y border-black py-1 px-4 text-[10px] font-bold tracking-widest bg-stone-100/80 shadow-sm z-20">
+              // MOVED LOWER: changed bottom-4 to bottom-2 to give space for the vinyl
+              <div className="absolute bottom-2 border-y border-black py-1 px-4 text-[10px] font-bold tracking-widest bg-stone-100/80 shadow-sm z-20">
                 SALATTU
               </div>
             )}

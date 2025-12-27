@@ -355,7 +355,7 @@ export default function App() {
               
               {/* LEFT SIDE: The Card */}
               <div className={`
-                flex flex-col items-center gap-4 z-20 transition-all duration-700
+                flex flex-col items-center gap-1 z-20 transition-all duration-700
                 ${showAnalysisPanel ? '-translate-x-4' : 'translate-x-0'}
               `}>
                 <div className="relative">
@@ -388,7 +388,7 @@ export default function App() {
 
                 {/* Play/Control Buttons - NOW HORIZONTAL */}
                 {!isRevealed && (
-                  <div className="flex items-center justify-center gap-4 mt-6">
+                  <div className="flex items-center justify-center gap-4 mt-2">
                      {!playError && (
                         <button onClick={togglePlayback} className="bg-white border-2 border-black p-3 rounded-full hover:bg-black hover:text-white transition-colors shadow-eink flex items-center gap-2">
                             {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}

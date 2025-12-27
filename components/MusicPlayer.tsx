@@ -42,6 +42,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ youtubeId, startAt, is
         width: '640',
         videoId: youtubeId,
         playerVars: {
+          'autoplay': 1, // Attempt autoplay
           'playsinline': 1,
           'controls': 0, // No player controls needed as we use custom UI
           'disablekb': 1,
@@ -137,11 +138,10 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ youtubeId, startAt, is
 
   }, [youtubeId, startAt, isPlaying]);
 
-  // Changed from off-screen absolute to a 1x1 pixel on-screen element.
-  // iOS/iPadOS aggressively throttles or pauses media in elements that are
-  // completely off-screen or display:none.
+  // Changed to fixed positioning with slight opacity. 
+  // IMPORTANT: pointer-events-none removed and opacity > 0 to satisfy iOS visibility requirements.
   return (
-    <div className="absolute left-0 bottom-0 w-[1px] h-[1px] opacity-0 overflow-hidden pointer-events-none z-0">
+    <div className="fixed top-0 left-0 w-1 h-1 opacity-[0.01] -z-50 overflow-hidden">
        <div ref={containerRef}></div>
     </div>
   );
