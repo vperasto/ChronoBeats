@@ -4,112 +4,72 @@ export const WINNING_SCORE = 10;
 
 export const SONGS: Song[] = [
   // --- 80-LUKU ---
-  {
-    id: '80s-1',
-    artist: 'Rick Astley',
-    title: 'Never Gonna Give You Up',
-    year: 1987,
-    youtubeId: 'dQw4w9WgXcQ', // Ikoninen
-    startAt: 0
-  },
-  {
-    id: '80s-2',
-    artist: 'a-ha',
-    title: 'Take On Me',
-    year: 1985,
-    youtubeId: 'djV11Xbc914', // Ikoninen intro
-    startAt: 0
-  },
-  {
-    id: '80s-3',
-    artist: 'Toto',
-    title: 'Africa',
-    year: 1982,
-    youtubeId: 'FTQbiNvZqaY',
-    startAt: 64 // Kertosäkeen alku
-  },
-  {
-    id: '80s-4',
-    artist: 'Journey',
-    title: "Don't Stop Believin'",
-    year: 1981,
-    youtubeId: '1k8craCGpgs',
-    startAt: 0
-  },
-  {
-    id: '80s-5',
-    artist: 'Queen',
-    title: 'Another One Bites the Dust',
-    year: 1980,
-    youtubeId: 'rY0WxgSXdEE',
-    startAt: 12 // Bassoriffi
-  },
+  { id: '80s-1', artist: 'Rick Astley', title: 'Never Gonna Give You Up', year: 1987, youtubeId: 'dQw4w9WgXcQ', startAt: 0 },
+  { id: '80s-2', artist: 'a-ha', title: 'Take On Me', year: 1985, youtubeId: 'djV11Xbc914', startAt: 0 },
+  { id: '80s-3', artist: 'Toto', title: 'Africa', year: 1982, youtubeId: 'FTQbiNvZqaY', startAt: 64 },
+  { id: '80s-4', artist: 'Journey', title: "Don't Stop Believin'", year: 1981, youtubeId: '1k8craCGpgs', startAt: 0 },
+  { id: '80s-5', artist: 'Queen', title: 'Another One Bites the Dust', year: 1980, youtubeId: 'rY0WxgSXdEE', startAt: 12 },
+  { id: '80s-6', artist: 'Michael Jackson', title: 'Billie Jean', year: 1982, youtubeId: 'Zi_XLOBDo_Y', startAt: 0 },
+  { id: '80s-7', artist: 'Eurythmics', title: 'Sweet Dreams (Are Made of This)', year: 1983, youtubeId: 'qeMFqkcPYcg', startAt: 0 },
+  { id: '80s-8', artist: 'Bon Jovi', title: "Livin' on a Prayer", year: 1986, youtubeId: 'lDK9QqIzhwk', startAt: 0 },
+  { id: '80s-9', artist: 'Cyndi Lauper', title: 'Girls Just Want to Have Fun', year: 1983, youtubeId: 'PIb6AZdTr-A', startAt: 0 },
+  { id: '80s-10', artist: 'Survivor', title: 'Eye of the Tiger', year: 1982, youtubeId: 'btPJPFnesV4', startAt: 0 },
+  { id: '80s-11', artist: 'The Police', title: 'Every Breath You Take', year: 1983, youtubeId: 'OMOGaugKpzs', startAt: 0 },
+  { id: '80s-12', artist: 'Madonna', title: 'Like a Virgin', year: 1984, youtubeId: 's__rX_WL100', startAt: 0 },
+  { id: '80s-13', artist: 'Prince', title: 'Purple Rain', year: 1984, youtubeId: 'TvnYmWpD_T8', startAt: 0 },
+  { id: '80s-14', artist: 'George Michael', title: 'Careless Whisper', year: 1984, youtubeId: 'izGwDsrQ1eQ', startAt: 0 },
+  { id: '80s-15', artist: 'Dire Straits', title: 'Money for Nothing', year: 1985, youtubeId: 'wTP2RUD_cL0', startAt: 0 },
+  { id: '80s-16', artist: 'Tears for Fears', title: 'Everybody Wants to Rule the World', year: 1985, youtubeId: 'aGCdLKXNF3w', startAt: 0 },
+  { id: '80s-17', artist: 'Europe', title: 'The Final Countdown', year: 1986, youtubeId: '9jK-NcRmVcw', startAt: 0 },
+  { id: '80s-18', artist: 'Whitney Houston', title: 'I Wanna Dance with Somebody', year: 1987, youtubeId: 'eH3giaIzONA', startAt: 0 },
+  { id: '80s-19', artist: 'Guns N’ Roses', title: 'Sweet Child O’ Mine', year: 1987, youtubeId: '1w7OgIMMRc4', startAt: 0 },
+  { id: '80s-20', artist: 'U2', title: 'With or Without You', year: 1987, youtubeId: 'ujNeHIo7oTE', startAt: 0 },
+  { id: '80s-21', artist: 'Prince', title: 'When Doves Cry', year: 1984, youtubeId: 'UG3VcCAlUgE', startAt: 0 },
+  { id: '80s-22', artist: 'Madonna', title: 'Material Girl', year: 1985, youtubeId: '6p-lDYPR2P8', startAt: 0 },
+  { id: '80s-23', artist: 'Depeche Mode', title: 'Just Can’t Get Enough', year: 1981, youtubeId: '_6FBfAQ-NDE', startAt: 0 },
+  { id: '80s-24', artist: 'The Cure', title: 'Just Like Heaven', year: 1987, youtubeId: 'nmDG0dBj3uQ', startAt: 0 },
 
   // --- 70-LUKU ---
-  {
-    id: '70s-1',
-    artist: 'Earth, Wind & Fire',
-    title: 'September',
-    year: 1978,
-    youtubeId: 'Gs069dndIYk',
-    startAt: 0
-  },
-  {
-    id: '70s-2',
-    artist: 'Bee Gees',
-    title: "Stayin' Alive",
-    year: 1977,
-    youtubeId: 'I_izvAbhExY',
-    startAt: 0
-  },
-  {
-    id: '70s-3',
-    artist: 'ABBA',
-    title: 'Dancing Queen',
-    year: 1976,
-    youtubeId: 'xFrGuyw1V8s',
-    startAt: 18 // Heti laulun alkuun
-  },
-  {
-    id: '70s-4',
-    artist: 'Stevie Wonder',
-    title: 'Superstition',
-    year: 1972,
-    youtubeId: '0CFuCYNx-1g',
-    startAt: 0 // Clavinet riffi
-  },
+  { id: '70s-1', artist: 'Earth, Wind & Fire', title: 'September', year: 1978, youtubeId: 'Gs069dndIYk', startAt: 0 },
+  { id: '70s-2', artist: 'Bee Gees', title: "Stayin' Alive", year: 1977, youtubeId: 'I_izvAbhExY', startAt: 0 },
+  { id: '70s-3', artist: 'ABBA', title: 'Dancing Queen', year: 1976, youtubeId: 'xFrGuyw1V8s', startAt: 18 },
+  { id: '70s-4', artist: 'Stevie Wonder', title: 'Superstition', year: 1972, youtubeId: '0CFuCYNx-1g', startAt: 0 },
+  { id: '70s-5', artist: 'Queen', title: 'Bohemian Rhapsody', year: 1975, youtubeId: 'fJ9rUzIMcZQ', startAt: 0 },
+  { id: '70s-6', artist: 'Village People', title: 'Y.M.C.A.', year: 1978, youtubeId: 'CS9OO0S5w2k', startAt: 0 },
+  { id: '70s-7', artist: 'Gloria Gaynor', title: 'I Will Survive', year: 1978, youtubeId: 'ARt9HV9T0w8', startAt: 0 },
+  { id: '70s-8', artist: 'Fleetwood Mac', title: 'Go Your Own Way', year: 1977, youtubeId: '6ul-cZyuYq4', startAt: 0 },
+  { id: '70s-9', artist: 'Donna Summer', title: 'I Feel Love', year: 1977, youtubeId: 'Nm-ISatLDG0', startAt: 0 },
+  { id: '70s-10', artist: 'Boney M.', title: 'Rasputin', year: 1978, youtubeId: 'kvDMlk3kSYg', startAt: 0 },
+  { id: '70s-11', artist: 'Led Zeppelin', title: 'Stairway to Heaven', year: 1971, youtubeId: 'QkF3oxziUI4', startAt: 0 },
+  { id: '70s-12', artist: 'Elton John', title: 'Rocket Man', year: 1972, youtubeId: 'DtVBCG6ThDk', startAt: 0 },
+  { id: '70s-13', artist: 'Deep Purple', title: 'Smoke on the Water', year: 1972, youtubeId: 'zUwEIt9ez7M', startAt: 0 },
+  { id: '70s-14', artist: 'Eagles', title: 'Hotel California', year: 1976, youtubeId: 'EqPtz5qN7HM', startAt: 0 },
+  { id: '70s-15', artist: 'Pink Floyd', title: 'Another Brick in the Wall (Pt. 2)', year: 1979, youtubeId: 'HrxX9TBj2zY', startAt: 0 },
+  { id: '70s-16', artist: 'The Jackson 5', title: 'ABC', year: 1970, youtubeId: 'ho7796-au8U', startAt: 0 },
+  { id: '70s-17', artist: 'David Bowie', title: 'Heroes', year: 1977, youtubeId: '44FSlstp6uY', startAt: 0 },
+  { id: '70s-18', artist: 'KC & The Sunshine Band', title: 'That’s the Way (I Like It)', year: 1975, youtubeId: 'R3k6vXQn9r8', startAt: 0 },
+  { id: '70s-19', artist: 'Lynyrd Skynyrd', title: 'Free Bird', year: 1973, youtubeId: 'QxIWDmmqZzY', startAt: 0 },
+  { id: '70s-20', artist: 'Rod Stewart', title: 'Maggie May', year: 1971, youtubeId: 'Vn5R3lYhLnQ', startAt: 0 },
 
   // --- 60-LUKU ---
-  {
-    id: '60s-1',
-    artist: 'Creedence Clearwater Revival',
-    title: 'Fortunate Son',
-    year: 1969,
-    youtubeId: 'ZWijx_AgPiA',
-    startAt: 0
-  },
-  {
-    id: '60s-2',
-    artist: 'Aretha Franklin',
-    title: 'Respect',
-    year: 1967,
-    youtubeId: '6FOUqQt3Kg0',
-    startAt: 0
-  },
-  {
-    id: '60s-3',
-    artist: 'The Rolling Stones',
-    title: 'Paint It, Black',
-    year: 1966,
-    youtubeId: 'O4irXQhgMqg',
-    startAt: 0
-  },
-  {
-    id: '60s-4',
-    artist: 'Ben E. King',
-    title: 'Stand By Me',
-    year: 1961,
-    youtubeId: 'hwZNL7QVJjE',
-    startAt: 0
-  }
+  { id: '60s-1', artist: 'Creedence Clearwater Revival', title: 'Fortunate Son', year: 1969, youtubeId: 'ZWijx_AgPiA', startAt: 0 },
+  { id: '60s-2', artist: 'Aretha Franklin', title: 'Respect', year: 1967, youtubeId: '6FOUqQt3Kg0', startAt: 0 },
+  { id: '60s-3', artist: 'The Rolling Stones', title: 'Paint It, Black', year: 1966, youtubeId: 'O4irXQhgMqg', startAt: 0 },
+  { id: '60s-4', artist: 'Ben E. King', title: 'Stand By Me', year: 1961, youtubeId: 'hwZNL7QVJjE', startAt: 0 },
+  { id: '60s-5', artist: 'The Animals', title: 'House of the Rising Sun', year: 1964, youtubeId: '4-43lLKaqBQ', startAt: 0 },
+  { id: '60s-6', artist: 'The Beach Boys', title: 'Good Vibrations', year: 1966, youtubeId: 'apBWI6xrbLY', startAt: 0 },
+  { id: '60s-7', artist: 'Jimi Hendrix', title: 'All Along the Watchtower', year: 1968, youtubeId: 'TLV4_xaYynY', startAt: 0 },
+  { id: '60s-8', artist: 'Elvis Presley', title: 'Suspicious Minds', year: 1969, youtubeId: 'RxOBOhRECoo', startAt: 0 },
+  { id: '60s-9', artist: 'Steppenwolf', title: 'Born to be Wild', year: 1968, youtubeId: '5UWRyjVyAm8', startAt: 0 },
+  { id: '60s-10', artist: 'The Beatles', title: 'Come Together', year: 1969, youtubeId: '45cYwDMibGo', startAt: 0 },
+  { id: '60s-11', artist: 'The Kinks', title: 'You Really Got Me', year: 1964, youtubeId: 'fTTsY-oz6Go', startAt: 0 },
+  { id: '60s-12', artist: 'Bob Dylan', title: 'Like a Rolling Stone', year: 1965, youtubeId: 'IwOfCgkyEj0', startAt: 0 },
+  { id: '60s-13', artist: 'The Beatles', title: 'Hey Jude', year: 1968, youtubeId: 'A_MjCqQoLLA', startAt: 0 },
+  { id: '60s-14', artist: 'The Doors', title: 'Light My Fire', year: 1967, youtubeId: 'mbj1RFaoyLk', startAt: 0 },
+  { id: '60s-15', artist: 'The Who', title: 'My Generation', year: 1965, youtubeId: 'qEXoYNqIvvI', startAt: 0 },
+  { id: '60s-16', artist: 'The Supremes', title: 'You Can’t Hurry Love', year: 1966, youtubeId: 'V2c5-9z3g_0', startAt: 0 },
+  { id: '60s-17', artist: 'Simon & Garfunkel', title: 'The Sound of Silence', year: 1965, youtubeId: '4zLfCnGVeL4', startAt: 0 },
+  { id: '60s-18', artist: 'Van Morrison', title: 'Brown Eyed Girl', year: 1967, youtubeId: 'UfmkgQRmmeE', startAt: 0 },
+  { id: '60s-19', artist: 'Otis Redding', title: '(Sittin’ On) The Dock of the Bay', year: 1968, youtubeId: 'rTVjnBo96Ug', startAt: 0 },
+  { id: '60s-20', artist: 'The Byrds', title: 'Mr. Tambourine Man', year: 1965, youtubeId: '3t4T4Aln0Cc', startAt: 0 }
 ];
