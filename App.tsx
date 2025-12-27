@@ -4,6 +4,7 @@ import { GamePhase, GameState, Player, Song, Challenge } from './types';
 import { SetupScreen } from './components/SetupScreen';
 import { Card } from './components/Card';
 import { MusicPlayer } from './components/MusicPlayer';
+import { MaintenanceConsole } from './components/MaintenanceConsole';
 import { 
   ArrowRight, 
   CheckCircle, 
@@ -22,7 +23,8 @@ import {
   AlertTriangle,
   RefreshCw,
   RotateCcw,
-  Plus
+  Plus,
+  Wrench
 } from 'lucide-react';
 
 const shuffle = <T,>(array: T[]): T[] => {
@@ -66,6 +68,7 @@ export default function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [bonusAwarded, setBonusAwarded] = useState(false);
   const [playError, setPlayError] = useState(false);
+  const [showMaintenance, setShowMaintenance] = useState(false);
   
   // State to control the visual "Slide out" animation. 
   // We separate this from GamePhase.REVEAL to allow the card to flip first.
@@ -291,6 +294,7 @@ export default function App() {
              PALAA ALKUUN
           </button>
         </div>
+        <MaintenanceConsole isOpen={showMaintenance} onClose={() => setShowMaintenance(false)} />
       </div>
     );
   }
@@ -312,16 +316,27 @@ export default function App() {
               <span className="border border-black px-2 text-[10px] font-bold uppercase py-0.5">{currentPlayer.name}</span>
             </div>
           </div>
-          <div className="flex gap-2 overflow-x-auto no-scrollbar max-w-[60%]">
-            {gameState.players.map((p, idx) => (
-              <div key={p.id} className={`border-2 p-1 px-2 min-w-[80px] shrink-0 ${idx === gameState.currentPlayerIndex ? 'bg-black text-white' : 'border-black'}`}>
-                <div className="text-[10px] font-bold uppercase truncate">{p.name}</div>
-                <div className="flex justify-between items-center">
-                  <div className="flex items-center gap-1 text-[10px]"><Coins className="w-3 h-3"/>{p.tokens}</div>
-                  <div className="text-[10px] font-bold">PTS {p.score}</div>
-                </div>
-              </div>
-            ))}
+          
+          <div className="flex items-center gap-4 flex-1 justify-end min-w-0">
+             <div className="flex gap-2 overflow-x-auto no-scrollbar max-w-[80%]">
+               {gameState.players.map((p, idx) => (
+                 <div key={p.id} className={`border-2 p-1 px-2 min-w-[80px] shrink-0 ${idx === gameState.currentPlayerIndex ? 'bg-black text-white' : 'border-black'}`}>
+                   <div className="text-[10px] font-bold uppercase truncate">{p.name}</div>
+                   <div className="flex justify-between items-center">
+                     <div className="flex items-center gap-1 text-[10px]"><Coins className="w-3 h-3"/>{p.tokens}</div>
+                     <div className="text-[10px] font-bold">PTS {p.score}</div>
+                   </div>
+                 </div>
+               ))}
+             </div>
+
+             <button 
+                onClick={() => setShowMaintenance(true)}
+                className="border-2 border-black p-2 hover:bg-black hover:text-white transition-colors"
+                title="Huoltokonsoli"
+             >
+                <Wrench className="w-4 h-4" />
+             </button>
           </div>
         </header>
 
@@ -538,6 +553,9 @@ export default function App() {
             </div>
           </div>
         </div>
+
+        {/* Maintenance Modal - Can be opened from header */}
+        <MaintenanceConsole isOpen={showMaintenance} onClose={() => setShowMaintenance(false)} />
       </div>
     </>
   );
