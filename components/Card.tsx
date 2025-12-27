@@ -146,17 +146,13 @@ export const Card: React.FC<CardProps> = ({ song, revealed = false, className = 
                <VinylRecord className={iconSize} isPlaying={isPlaying} />
              )}
              
-            {!isTimeline && (
-              // MOVED LOWER: changed bottom-2 to bottom-1
-              <div className="absolute bottom-1 border-y border-black py-1 px-4 text-[10px] font-bold tracking-widest bg-stone-100/80 shadow-sm z-20">
-                SALATTU
-              </div>
-            )}
+             {/* "SALATTU" Badge Removed per user request */}
+
             {isTimeline && <div className="text-[8px] font-bold tracking-widest opacity-50 mt-1">???</div>}
           </div>
 
           <div className={`w-full mt-auto border-t-[3px] border-black pt-1 font-bold z-10 ${yearSize}`}>
-            ????
+            {isTimeline ? '????' : 'MIKÄ VUOSI?'}
           </div>
         </div>
 

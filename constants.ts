@@ -3,6 +3,33 @@ import { Song } from './types';
 export const WINNING_SCORE = 10;
 
 export const SONGS: Song[] = [
+  // --- 90-LUKU ---
+  { id: '90s-1', artist: 'Nirvana', title: 'Smells Like Teen Spirit', year: 1991, youtubeId: 'hTWKbfoikeg', startAt: 0 },
+  { id: '90s-2', artist: 'Pearl Jam', title: 'Alive', year: 1991, youtubeId: 'qM0zINtulhM', startAt: 0 },
+  { id: '90s-3', artist: 'Radiohead', title: 'Creep', year: 1992, youtubeId: 'XFkzRNyygfk', startAt: 0 },
+  { id: '90s-4', artist: 'R.E.M.', title: 'Losing My Religion', year: 1991, youtubeId: 'xwtdhWltSIg', startAt: 0 },
+  { id: '90s-5', artist: 'Foo Fighters', title: 'Everlong', year: 1997, youtubeId: 'eBG7P-K-r1Y', startAt: 0 },
+  { id: '90s-6', artist: 'Britney Spears', title: '…Baby One More Time', year: 1998, youtubeId: 'C-u5WLJ9Yk4', startAt: 0 },
+  { id: '90s-7', artist: 'Backstreet Boys', title: 'I Want It That Way', year: 1999, youtubeId: '4fndeDfaWCg', startAt: 0 },
+  { id: '90s-8', artist: 'Spice Girls', title: 'Wannabe', year: 1996, youtubeId: 'gJLIiF15wjQ', startAt: 0 },
+  { id: '90s-9', artist: 'Madonna', title: 'Vogue', year: 1990, youtubeId: 'GuJQSAiODqI', startAt: 0 },
+  { id: '90s-10', artist: 'George Michael', title: 'Freedom! ’90', year: 1990, youtubeId: 'diYAc7gB-0M', startAt: 0 },
+  { id: '90s-11', artist: 'Metallica', title: 'Enter Sandman', year: 1991, youtubeId: 'CD-E-LDc384', startAt: 0 },
+  { id: '90s-12', artist: 'Guns N’ Roses', title: 'November Rain', year: 1991, youtubeId: '8SbUC-UaAxE', startAt: 0 },
+  { id: '90s-13', artist: 'Red Hot Chili Peppers', title: 'Under the Bridge', year: 1992, youtubeId: 'GLvohMXgcBo', startAt: 0 },
+  { id: '90s-14', artist: 'Aerosmith', title: 'I Don’t Want to Miss a Thing', year: 1998, youtubeId: 'JkK8g6FMEXE', startAt: 0 },
+  { id: '90s-15', artist: 'Bon Jovi', title: 'Always', year: 1994, youtubeId: '9BMwcO6_hyA', startAt: 0 },
+  { id: '90s-16', artist: '2Pac', title: 'California Love', year: 1995, youtubeId: '5wBTdfAkqGU', startAt: 0 },
+  { id: '90s-17', artist: 'The Notorious B.I.G.', title: 'Juicy', year: 1994, youtubeId: '_JZom_gVfuw', startAt: 0 },
+  { id: '90s-18', artist: 'Dr. Dre ft. Snoop Dogg', title: 'Still D.R.E.', year: 1999, youtubeId: '_CL6n0FJZpk', startAt: 0 },
+  { id: '90s-19', artist: 'TLC', title: 'No Scrubs', year: 1999, youtubeId: 'FrLequ6dUdM', startAt: 0 },
+  { id: '90s-20', artist: 'Coolio', title: 'Gangsta’s Paradise', year: 1995, youtubeId: 'fPO76Jlnz6c', startAt: 0 },
+  { id: '90s-21', artist: 'Haddaway', title: 'What Is Love', year: 1993, youtubeId: 'HEXWRTEbj1I', startAt: 0 },
+  { id: '90s-22', artist: 'Eiffel 65', title: 'Blue (Da Ba Dee)', year: 1999, youtubeId: '68ugkg9RePc', startAt: 0 },
+  { id: '90s-23', artist: 'Corona', title: 'The Rhythm of the Night', year: 1993, youtubeId: 'u3ltZmI5LQw', startAt: 0 },
+  { id: '90s-24', artist: 'Snap!', title: 'Rhythm Is a Dancer', year: 1992, youtubeId: 'KkhGkRahU6g', startAt: 0 },
+  { id: '90s-25', artist: 'Ace of Base', title: 'All That She Wants', year: 1992, youtubeId: 'd73tiBBebHg', startAt: 0 },
+
   // --- 80-LUKU ---
   { id: '80s-1', artist: 'Rick Astley', title: 'Never Gonna Give You Up', year: 1987, youtubeId: 'dQw4w9WgXcQ', startAt: 0 },
   { id: '80s-2', artist: 'a-ha', title: 'Take On Me', year: 1985, youtubeId: 'djV11Xbc914', startAt: 0 },
