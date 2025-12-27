@@ -81,11 +81,19 @@ export default function App() {
       tokens: 2
     }));
 
+    // Deal first card immediately
+    const firstCard = shuffledDeck[0];
+    const remainingDeck = shuffledDeck.slice(1);
+
+    setIsPlaying(false); // Start paused
+    setPlayError(false);
+    setBonusAwarded(false);
+
     setGameState({
       players: initialPlayers,
       currentPlayerIndex: 0,
-      deck: shuffledDeck,
-      currentCard: null,
+      deck: remainingDeck,
+      currentCard: firstCard,
       phase: GamePhase.LISTENING,
       winner: null,
       activePlayerSlot: null,
@@ -109,25 +117,6 @@ export default function App() {
 
   const currentPlayer = gameState.players[gameState.currentPlayerIndex];
 
-  const startTurn = () => {
-    if (gameState.deck.length === 0) return;
-    const nextCard = gameState.deck[0];
-    const newDeck = gameState.deck.slice(1);
-
-    setBonusAwarded(false);
-    setPlayError(false);
-    setShowAnalysisPanel(false); // Reset panel visibility
-    setGameState(prev => ({
-      ...prev,
-      deck: newDeck,
-      currentCard: nextCard,
-      phase: GamePhase.LISTENING,
-      activePlayerSlot: null,
-      challenger: null
-    }));
-    setIsPlaying(true);
-  };
-
   const drawNewCard = () => {
     if (gameState.deck.length === 0) {
       alert("Pakka on tyhjä! Peliä ei voi jatkaa.");
@@ -138,7 +127,7 @@ export default function App() {
     const newDeck = gameState.deck.slice(1);
 
     setPlayError(false);
-    setIsPlaying(true);
+    setIsPlaying(false); // Always start paused on new card
     
     setGameState(prev => ({
       ...prev,
@@ -226,13 +215,22 @@ export default function App() {
 
     const winner = updatedPlayers.find(p => p.timeline.length >= WINNING_SCORE) || null;
 
+    // Prepare next turn
+    const nextCard = !winner && gameState.deck.length > 0 ? gameState.deck[0] : null;
+    const newDeck = !winner && gameState.deck.length > 0 ? gameState.deck.slice(1) : gameState.deck;
+
     setShowAnalysisPanel(false);
+    setIsPlaying(false); // Pause for next turn
+    setBonusAwarded(false);
+    setPlayError(false);
+
     setGameState(prev => ({
       ...prev,
       players: updatedPlayers,
       winner,
       phase: winner ? GamePhase.GAME_OVER : GamePhase.LISTENING,
-      currentCard: null,
+      currentCard: winner ? null : nextCard,
+      deck: newDeck,
       activePlayerSlot: null,
       challenger: null,
       currentPlayerIndex: (prev.currentPlayerIndex + 1) % prev.players.length
@@ -339,16 +337,6 @@ export default function App() {
         {/* Center Stage: Flex-1 to take available space, min-h-0 to allow shrinking */}
         <main className="flex-1 min-h-0 flex items-center justify-center relative w-full perspective-1000 mb-2">
           
-          {/* Start Button */}
-          {!gameState.currentCard && !isRevealed && (
-            <button onClick={startTurn} className="group relative bg-black text-white p-8 text-3xl font-bold border-[4px] border-black hover:bg-white hover:text-black transition-all">
-              <div className="flex items-center gap-4">
-                <Volume2 className="w-10 h-10 group-hover:scale-110 transition-transform" />
-                KÄYNNISTÄ AUDIO
-              </div>
-            </button>
-          )}
-
           {/* Active Game Area */}
           {gameState.currentCard && (
             <div className="flex items-center justify-center transition-all duration-700 ease-in-out gap-0 h-full">
