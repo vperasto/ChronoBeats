@@ -386,9 +386,9 @@ export default function App() {
                   )}
                 </div>
 
-                {/* Play/Control Buttons */}
+                {/* Play/Control Buttons - NOW HORIZONTAL */}
                 {!isRevealed && (
-                  <div className="flex flex-col items-center gap-2">
+                  <div className="flex items-center justify-center gap-4 mt-6">
                      {!playError && (
                         <button onClick={togglePlayback} className="bg-white border-2 border-black p-3 rounded-full hover:bg-black hover:text-white transition-colors shadow-eink flex items-center gap-2">
                             {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
@@ -397,8 +397,9 @@ export default function App() {
                      )}
 
                     {gameState.phase === GamePhase.CHALLENGING && (
-                      <button onClick={resolveReveal} className="bg-black text-white px-4 py-2 font-bold border-2 border-black flex items-center gap-2 text-xs hover:scale-105 transition-transform mt-2">
-                        <FastForward className="w-4 h-4"/> LOPETA & PALJASTA
+                      <button onClick={resolveReveal} className="bg-black text-white border-2 border-black p-3 rounded-full hover:bg-stone-800 transition-colors shadow-eink flex items-center gap-2">
+                        <FastForward className="w-5 h-5"/> 
+                        <span className="text-xs font-bold uppercase w-16 text-center leading-tight">Paljasta</span>
                       </button>
                     )}
                   </div>

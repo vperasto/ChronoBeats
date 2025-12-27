@@ -64,6 +64,7 @@ export const Card: React.FC<CardProps> = ({ song, revealed = false, className = 
   const shadowClass = isLarge ? 'shadow-eink-lg' : 'shadow-eink';
 
   // Common inner content style for both faces
+  // NOTE: Added WebkitBackfaceVisibility for iOS/iPad support
   const faceStyle = `
     absolute inset-0 w-full h-full
     bg-amber-100 border-[3px] border-black ${shadowClass}
@@ -85,7 +86,7 @@ export const Card: React.FC<CardProps> = ({ song, revealed = false, className = 
         `}
       >
         {/* FRONT FACE (Hidden / Mystery) */}
-        <div className={faceStyle}>
+        <div className={faceStyle} style={{ WebkitBackfaceVisibility: 'hidden', backfaceVisibility: 'hidden' }}>
           {/* Inner dashed border */}
           <div className="absolute inset-1 border-2 border-black/10 border-dashed pointer-events-none"></div>
 
@@ -111,7 +112,10 @@ export const Card: React.FC<CardProps> = ({ song, revealed = false, className = 
         </div>
 
         {/* BACK FACE (Revealed / Info) */}
-        <div className={`${faceStyle} rotate-y-180`}>
+        <div 
+          className={`${faceStyle} rotate-y-180`} 
+          style={{ WebkitBackfaceVisibility: 'hidden', backfaceVisibility: 'hidden' }}
+        >
           {/* Inner dashed border */}
           <div className="absolute inset-1 border-2 border-black/10 border-dashed pointer-events-none"></div>
 

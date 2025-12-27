@@ -137,10 +137,11 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ youtubeId, startAt, is
 
   }, [youtubeId, startAt, isPlaying]);
 
-  // We hide the standard size player off-screen using absolute positioning.
-  // Using 'display: none' often stops YouTube playback, so off-screen is safer.
+  // Changed from off-screen absolute to a 1x1 pixel on-screen element.
+  // iOS/iPadOS aggressively throttles or pauses media in elements that are
+  // completely off-screen or display:none.
   return (
-    <div className="absolute -left-[9999px] top-0 overflow-hidden opacity-0 pointer-events-none">
+    <div className="absolute left-0 bottom-0 w-[1px] h-[1px] opacity-0 overflow-hidden pointer-events-none z-0">
        <div ref={containerRef}></div>
     </div>
   );
