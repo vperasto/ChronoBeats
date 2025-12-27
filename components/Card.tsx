@@ -58,11 +58,14 @@ const ToneArm = ({ isPlaying }: { isPlaying: boolean }) => (
      </div>
      
      {/* The Arm Assembly */}
-     {/* We rotate the whole arm from the pivot point */}
+     {/* We rotate the whole arm from the pivot point. 
+         Positive rotation moves the bottom LEFT (towards center).
+         0deg is vertical down (parked). 
+         35deg is playing position. */}
      <div 
        className={`
          absolute top-7 right-7 w-20 h-40 origin-top-right transition-transform duration-1000 ease-in-out
-         ${isPlaying ? 'rotate-[-25deg]' : 'rotate-[-55deg]'}
+         ${isPlaying ? 'rotate-[35deg]' : 'rotate-[0deg]'}
        `}
      >
         {/* Main Arm Shaft */}
@@ -136,8 +139,8 @@ export const Card: React.FC<CardProps> = ({ song, revealed = false, className = 
              )}
              
             {!isTimeline && (
-              // MOVED LOWER: changed bottom-4 to bottom-2 to give space for the vinyl
-              <div className="absolute bottom-2 border-y border-black py-1 px-4 text-[10px] font-bold tracking-widest bg-stone-100/80 shadow-sm z-20">
+              // MOVED LOWER: changed bottom-2 to bottom-1
+              <div className="absolute bottom-1 border-y border-black py-1 px-4 text-[10px] font-bold tracking-widest bg-stone-100/80 shadow-sm z-20">
                 SALATTU
               </div>
             )}
