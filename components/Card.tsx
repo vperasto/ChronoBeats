@@ -61,11 +61,11 @@ const ToneArm = ({ isPlaying }: { isPlaying: boolean }) => (
      {/* We rotate the whole arm from the pivot point. 
          Positive rotation moves the bottom LEFT (towards center).
          0deg is vertical down (parked). 
-         35deg is playing position. */}
+         20deg is playing position (reduced from 35deg to hit grooves, not label). */}
      <div 
        className={`
          absolute top-7 right-7 w-20 h-40 origin-top-right transition-transform duration-1000 ease-in-out
-         ${isPlaying ? 'rotate-[35deg]' : 'rotate-[0deg]'}
+         ${isPlaying ? 'rotate-[20deg]' : 'rotate-[0deg]'}
        `}
      >
         {/* Main Arm Shaft */}
