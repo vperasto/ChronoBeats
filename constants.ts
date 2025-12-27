@@ -3,75 +3,113 @@ import { Song } from './types';
 export const WINNING_SCORE = 10;
 
 export const SONGS: Song[] = [
-  // 2000-luku & Modernit
+  // --- 80-LUKU ---
   {
-    id: '1',
-    artist: 'Nickelback',
-    title: 'How You Remind Me',
-    year: 2001,
-    youtubeId: 'DmeUuoxyt_E', // Roadrunner Records upload (often safer than VEVO)
-    startAt: 45
-  },
-  {
-    id: '4',
-    artist: 'Meghan Trainor',
-    title: 'All About That Bass',
-    year: 2014,
-    youtubeId: 'C-u5WLJ9Yk4', // Lyric Video (Embedding usually allowed)
-    startAt: 38
-  },
-
-  // 90-luku
-  {
-    id: '9',
-    artist: 'Guns N\' Roses',
-    title: 'November Rain',
-    year: 1991,
-    youtubeId: '8SbUC-UaAxE', // Official (Usually works, fallback to error handler if not)
-    startAt: 60
-  },
-  {
-    id: '10',
-    artist: 'Ace of Base',
-    title: 'All That She Wants',
-    year: 1992,
-    youtubeId: 'd73tiBBz20Q', // Official
-    startAt: 10
-  },
-
-  // 80-luku
-  {
-    id: '2',
-    artist: 'U2',
-    title: 'With Or Without You',
+    id: '80s-1',
+    artist: 'Rick Astley',
+    title: 'Never Gonna Give You Up',
     year: 1987,
-    youtubeId: 'XmSdTa9kaiQ', // Alternate Official
-    startAt: 60
-  },
-  {
-    id: '6',
-    artist: 'Guns N\' Roses',
-    title: 'Sweet Child O\' Mine',
-    year: 1987,
-    youtubeId: 'o1tj2zJ2Wvg', // Alternate Official
-    startAt: 0
-  },
-
-  // 70-luku & Vanhemmat
-  {
-    id: '3',
-    artist: 'James Brown',
-    title: 'I Got You (I Feel Good)',
-    year: 1965,
-    youtubeId: 'U5TqIdff_DQ', // Live/Alternate
+    youtubeId: 'dQw4w9WgXcQ', // Ikoninen
     startAt: 0
   },
   {
-    id: '5',
-    artist: 'Chicago',
-    title: 'If You Leave Me Now',
+    id: '80s-2',
+    artist: 'a-ha',
+    title: 'Take On Me',
+    year: 1985,
+    youtubeId: 'djV11Xbc914', // Ikoninen intro
+    startAt: 0
+  },
+  {
+    id: '80s-3',
+    artist: 'Toto',
+    title: 'Africa',
+    year: 1982,
+    youtubeId: 'FTQbiNvZqaY',
+    startAt: 64 // Kertosäkeen alku
+  },
+  {
+    id: '80s-4',
+    artist: 'Journey',
+    title: "Don't Stop Believin'",
+    year: 1981,
+    youtubeId: '1k8craCGpgs',
+    startAt: 0
+  },
+  {
+    id: '80s-5',
+    artist: 'Queen',
+    title: 'Another One Bites the Dust',
+    year: 1980,
+    youtubeId: 'rY0WxgSXdEE',
+    startAt: 12 // Bassoriffi
+  },
+
+  // --- 70-LUKU ---
+  {
+    id: '70s-1',
+    artist: 'Earth, Wind & Fire',
+    title: 'September',
+    year: 1978,
+    youtubeId: 'Gs069dndIYk',
+    startAt: 0
+  },
+  {
+    id: '70s-2',
+    artist: 'Bee Gees',
+    title: "Stayin' Alive",
+    year: 1977,
+    youtubeId: 'I_izvAbhExY',
+    startAt: 0
+  },
+  {
+    id: '70s-3',
+    artist: 'ABBA',
+    title: 'Dancing Queen',
     year: 1976,
-    youtubeId: 'cFRk0GXuyy4', // Remaster/Audio
-    startAt: 60
+    youtubeId: 'xFrGuyw1V8s',
+    startAt: 18 // Heti laulun alkuun
   },
+  {
+    id: '70s-4',
+    artist: 'Stevie Wonder',
+    title: 'Superstition',
+    year: 1972,
+    youtubeId: '0CFuCYNx-1g',
+    startAt: 0 // Clavinet riffi
+  },
+
+  // --- 60-LUKU ---
+  {
+    id: '60s-1',
+    artist: 'Creedence Clearwater Revival',
+    title: 'Fortunate Son',
+    year: 1969,
+    youtubeId: 'ZWijx_AgPiA',
+    startAt: 0
+  },
+  {
+    id: '60s-2',
+    artist: 'Aretha Franklin',
+    title: 'Respect',
+    year: 1967,
+    youtubeId: '6FOUqQt3Kg0',
+    startAt: 0
+  },
+  {
+    id: '60s-3',
+    artist: 'The Rolling Stones',
+    title: 'Paint It, Black',
+    year: 1966,
+    youtubeId: 'O4irXQhgMqg',
+    startAt: 0
+  },
+  {
+    id: '60s-4',
+    artist: 'Ben E. King',
+    title: 'Stand By Me',
+    year: 1961,
+    youtubeId: 'hwZNL7QVJjE',
+    startAt: 0
+  }
 ];
