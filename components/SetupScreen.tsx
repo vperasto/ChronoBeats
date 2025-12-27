@@ -195,8 +195,15 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({ onStartGame }) => {
         </button>
       </div>
 
-      <div className="text-center font-mono text-xs opacity-50">
-        Suositus 2-10 pelaajaa • Äänet vaaditaan
+      <div className="text-center font-mono text-xs opacity-60 space-y-4">
+        <p>Suositus 2-10 pelaajaa • Äänet vaaditaan</p>
+        
+        <div className="border-t-2 border-black/10 pt-4 mt-6 w-full">
+            <p className="font-bold mb-2">© 2025 VESA PERASTO // CHRONOBEATS VINYL EDITION</p>
+            <p className="text-[10px] leading-tight opacity-70 max-w-lg mx-auto">
+                Musiikki toistetaan YouTuben kautta (YouTube IFrame API). Sovellus ei isännöi tai omista musiikkikappaleita tai niiden oikeuksia. Kaikki oikeudet kuuluvat kappaleiden alkuperäisille omistajille.
+            </p>
+        </div>
       </div>
     </div>
   );
