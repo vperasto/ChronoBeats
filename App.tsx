@@ -24,7 +24,8 @@ import {
   RefreshCw,
   RotateCcw,
   Plus,
-  Wrench
+  Wrench,
+  Lock
 } from 'lucide-react';
 
 const shuffle = <T,>(array: T[]): T[] => {
@@ -480,7 +481,11 @@ export default function App() {
                 
                 const isSelected = gameState.activePlayerSlot === idx;
                 const isChallenged = gameState.challenger?.slotIndex === idx;
-                const canInteract = gameState.phase === GamePhase.LISTENING || (gameState.phase === GamePhase.CHALLENGING && gameState.activePlayerSlot !== idx);
+                
+                // Interaction states
+                const canPlaceHere = gameState.phase === GamePhase.LISTENING && !isSelected;
+                const canChallengeHere = gameState.phase === GamePhase.CHALLENGING; 
+                const isInteractive = canPlaceHere || canChallengeHere;
 
                 return (
                   <React.Fragment key={`slot-${idx}`}>
@@ -495,50 +500,58 @@ export default function App() {
                           relative transition-all duration-200 flex items-center justify-center
                           ${isSelected ? 'w-12 bg-black text-white' : 'w-4 hover:w-10 bg-stone-200 text-stone-400 hover:text-black hover:bg-stone-300'}
                           ${isChallenged ? 'ring-2 ring-yellow-400 z-10 w-10' : ''}
-                          ${canInteract ? 'cursor-pointer group' : 'pointer-events-none opacity-50'}
+                          ${canPlaceHere ? 'cursor-pointer group' : ''}
+                          ${!isInteractive && !isSelected ? 'pointer-events-none opacity-50' : ''}
                           h-24 md:h-32 rounded-sm
                         `}>
                           
-                          {/* Interaction Layer */}
-                          {canInteract && (
-                            <>
-                              {gameState.phase === GamePhase.LISTENING && (
-                                <button 
+                          {/* 1. LOCKED VISUALS (Always visible if selected) */}
+                          {isSelected && (
+                               <div className="absolute inset-0 w-full h-full flex flex-col items-center gap-1 py-2 z-10">
+                                  <Lock className="w-3 h-3 text-white" />
+                                  <span className="flex-1 [writing-mode:vertical-rl] rotate-180 text-[10px] font-bold tracking-[0.2em] flex items-center justify-center text-white">
+                                    LUKITTU
+                                  </span>
+                                  <CheckCircle className="w-3 h-3 text-white" />
+                               </div>
+                          )}
+
+                          {/* 2. PLACEMENT BUTTON (Listening phase only) */}
+                          {canPlaceHere && (
+                               <button 
                                   onClick={() => handleActivePlacement(idx)} 
-                                  className="absolute inset-0 w-full h-full flex items-center justify-center focus:outline-none"
-                                >
-                                  {isSelected ? <CheckCircle className="w-5 h-5"/> : <Plus className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity"/>}
-                                </button>
-                              )}
-                              
-                              {gameState.phase === GamePhase.CHALLENGING && (
-                                <div className="absolute inset-0 w-full h-full">
-                                    {/* Others challenge */}
-                                    {gameState.players.map(p => (
-                                      p.id !== currentPlayer.id && p.tokens > 0 && (
-                                        <button 
+                                  className="absolute inset-0 w-full h-full flex items-center justify-center focus:outline-none z-20"
+                               >
+                                 <Plus className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity"/>
+                               </button>
+                          )}
+
+                          {/* 3. CHALLENGE OVERLAY (Challenging phase) */}
+                          {gameState.phase === GamePhase.CHALLENGING && (
+                              <div className="absolute inset-0 w-full h-full z-30 pointer-events-none flex items-center justify-center">
+                                  {gameState.players.map(p => (
+                                    p.id !== currentPlayer.id && p.tokens > 0 && (
+                                       <button 
                                           key={p.id} 
                                           onClick={() => handleChallenge(p.id, idx)} 
                                           className={`
-                                            absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+                                            absolute
                                             w-8 h-8 rounded-full flex items-center justify-center
                                             bg-yellow-400 text-black border border-black shadow-sm
-                                            hover:scale-110 transition-transform z-20
-                                            ${gameState.challenger?.playerId === p.id && gameState.challenger?.slotIndex === idx ? 'ring-2 ring-black' : ''}
+                                            hover:scale-110 transition-transform pointer-events-auto
+                                            ${gameState.challenger?.playerId === p.id && gameState.challenger?.slotIndex === idx ? 'ring-2 ring-black scale-110 z-40' : 'z-30'}
                                           `}
                                           title={`${p.name}: Haasta!`}
-                                        >
-                                          <Zap className="w-4 h-4" />
-                                        </button>
-                                      )
-                                    ))}
-                                </div>
-                              )}
-                            </>
+                                       >
+                                         <Zap className="w-4 h-4" />
+                                       </button>
+                                    )
+                                  ))}
+                              </div>
                           )}
-
+                          
                           {/* Marker Icons */}
-                          {isRevealed && isSelected && <User className="w-4 h-4"/>}
+                          {isRevealed && isSelected && <User className="w-4 h-4 absolute top-1 right-1 z-20 text-white"/>}
                         </div>
                       )}
                     </div>
