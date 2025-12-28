@@ -484,7 +484,7 @@ export default function App() {
                 
                 // Interaction states
                 const canPlaceHere = gameState.phase === GamePhase.LISTENING && !isSelected;
-                const canChallengeHere = gameState.phase === GamePhase.CHALLENGING; 
+                const canChallengeHere = gameState.phase === GamePhase.CHALLENGING && !isSelected; 
                 const isInteractive = canPlaceHere || canChallengeHere;
 
                 return (
@@ -527,7 +527,7 @@ export default function App() {
                           )}
 
                           {/* 3. CHALLENGE OVERLAY (Challenging phase) */}
-                          {gameState.phase === GamePhase.CHALLENGING && (
+                          {gameState.phase === GamePhase.CHALLENGING && !isSelected && (
                               <div className="absolute inset-0 w-full h-full z-30 pointer-events-none flex items-center justify-center">
                                   {gameState.players.map(p => (
                                     p.id !== currentPlayer.id && p.tokens > 0 && (
