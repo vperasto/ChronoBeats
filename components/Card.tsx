@@ -110,9 +110,7 @@ export const Card: React.FC<CardProps> = ({ song, revealed = false, className = 
   // Define icon size separately
   const iconSize = isLarge ? 'w-40 h-40' : (isTimeline ? 'w-8 h-8' : 'w-20 h-20');
   const textSize = isLarge ? 'text-2xl' : (isTimeline ? 'text-[10px] leading-3' : 'text-xs');
-  
-  // INCREASED YEAR SIZE FOR TIMELINE: From text-[10px] to text-sm (14px)
-  const yearSize = isLarge ? 'text-xl' : (isTimeline ? 'text-sm' : 'text-xs');
+  const yearSize = isLarge ? 'text-xl' : (isTimeline ? 'text-[10px]' : 'text-xs');
 
   return (
     <div className={`group perspective-1000 ${sizeClasses} ${className}`}>
@@ -148,6 +146,8 @@ export const Card: React.FC<CardProps> = ({ song, revealed = false, className = 
                <VinylRecord className={iconSize} isPlaying={isPlaying} />
              )}
              
+             {/* "SALATTU" Badge Removed per user request */}
+
             {isTimeline && <div className="text-[8px] font-bold tracking-widest opacity-50 mt-1">???</div>}
           </div>
 
