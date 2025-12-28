@@ -89,13 +89,16 @@ export default function App() {
     const firstCard = shuffledDeck[0];
     const remainingDeck = shuffledDeck.slice(1);
 
+    // Randomize starting player
+    const startingPlayerIndex = Math.floor(Math.random() * initialPlayers.length);
+
     setIsPlaying(false); // Start paused
     setPlayError(false);
     setBonusAwarded(false);
 
     setGameState({
       players: initialPlayers,
-      currentPlayerIndex: 0,
+      currentPlayerIndex: startingPlayerIndex,
       deck: remainingDeck,
       currentCard: firstCard,
       phase: GamePhase.LISTENING,
@@ -350,8 +353,8 @@ export default function App() {
             />
         )}
 
-        {/* Center Stage: Flex-1 to take available space, min-h-0 to allow shrinking */}
-        <main className="flex-1 min-h-0 flex items-center justify-center relative w-full perspective-1000 mb-2">
+        {/* Center Stage: Flex-1 to take available space, min-h-0 to allow shrinking. ADDED bg-vinyl-pattern HERE. */}
+        <main className="flex-1 min-h-0 flex items-center justify-center relative w-full perspective-1000 mb-2 bg-vinyl-pattern">
           
           {/* Active Game Area */}
           {gameState.currentCard && (

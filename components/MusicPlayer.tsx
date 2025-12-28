@@ -42,7 +42,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ youtubeId, startAt, is
         width: '640',
         videoId: youtubeId,
         playerVars: {
-          'autoplay': 1, // Attempt autoplay
+          'autoplay': 0, // Disabled autoplay so user must click Play
           'playsinline': 1,
           'controls': 0, // No player controls needed as we use custom UI
           'disablekb': 1,
