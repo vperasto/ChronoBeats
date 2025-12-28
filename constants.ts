@@ -19,7 +19,7 @@ export const SONGS: Song[] = [
   { id: '90s-13', artist: 'Red Hot Chili Peppers', title: 'Under the Bridge', year: 1992, youtubeId: 'GLvohMXgcBo', startAt: 0 },
   { id: '90s-14', artist: 'Aerosmith', title: 'I Don’t Want to Miss a Thing', year: 1998, youtubeId: 'JkK8g6FMEXE', startAt: 0 },
   { id: '90s-15', artist: 'Bon Jovi', title: 'Always', year: 1994, youtubeId: '9BMwcO6_hyA', startAt: 0 },
-  { id: '90s-16', artist: '2Pac', title: 'California Love', year: 1995, youtubeId: '5wBTdfAkqGU', startAt: 0 },
+  { id: '90s-16', artist: '2Pac', title: 'California Love', year: 1995, youtubeId: 'omHzO-iN6b4', startAt: 0 }, // Changed to Topic Audio
   { id: '90s-17', artist: 'The Notorious B.I.G.', title: 'Juicy', year: 1994, youtubeId: '_JZom_gVfuw', startAt: 0 },
   { id: '90s-18', artist: 'Dr. Dre ft. Snoop Dogg', title: 'Still D.R.E.', year: 1999, youtubeId: '_CL6n0FJZpk', startAt: 0 },
   { id: '90s-19', artist: 'TLC', title: 'No Scrubs', year: 1999, youtubeId: 'FrLequ6dUdM', startAt: 0 },
@@ -134,39 +134,38 @@ export const SONGS: Song[] = [
 
 export const FINNISH_SONGS: Song[] = [
   // --- MODERNIT & 2000-LUKU ---
-  { id: 'fi-1', artist: 'Käärijä', title: 'Cha Cha Cha', year: 2023, youtubeId: 'rJHe-iZUFf8', startAt: 55 }, // Eurovision Official
-  { id: 'fi-2', artist: 'Lordi', title: 'Hard Rock Hallelujah', year: 2006, youtubeId: 'gAh9NRGNhUU', startAt: 55 }, // Eurovision Official
-  { id: 'fi-3', artist: 'Antti Tuisku', title: 'Peto on irti', year: 2015, youtubeId: '0Jj4oZ5sF5I', startAt: 40 },
-  { id: 'fi-4', artist: 'PMMP', title: 'Rusketusraidat', year: 2003, youtubeId: 'fvQYFk26q_o', startAt: 40 },
-  { id: 'fi-5', artist: 'Maija Vilkkumaa', title: 'Satumaa-tango', year: 1999, youtubeId: 'j8e_0-R7afo', startAt: 45 },
-  { id: 'fi-6', artist: 'Robin', title: 'Frontside Ollie', year: 2012, youtubeId: 'oM4jWq3c1jA', startAt: 30 },
-  { id: 'fi-7', artist: 'Cheek', title: 'Timantit on ikuisia', year: 2013, youtubeId: '8p8_R5Jd-yQ', startAt: 45 },
-  { id: 'fi-8', artist: 'Jenni Vartiainen', title: 'Missä muruseni on', year: 2010, youtubeId: 'Twu6B4R56rI', startAt: 50 },
-  { id: 'fi-9', artist: 'Haloo Helsinki!', title: 'Maailman toisella puolen', year: 2011, youtubeId: 'jHpL8zW4o4U', startAt: 50 },
-  { id: 'fi-10', artist: 'JVG', title: 'Ikuinen vappu', year: 2019, youtubeId: 'F2tQGj_iB48', startAt: 30 },
+  { id: 'fi-1', artist: 'Käärijä', title: 'Cha Cha Cha', year: 2023, youtubeId: 'rJHe-iZUFf8', startAt: 0 }, // UMK Official Live
+  { id: 'fi-2', artist: 'Lordi', title: 'Hard Rock Hallelujah', year: 2006, youtubeId: 'gAh9NRGNhUU', startAt: 0 }, // Eurovision Official Live
+  { id: 'fi-3', artist: 'Antti Tuisku', title: 'Peto on irti', year: 2015, youtubeId: 'tk5IW-pYZk8', startAt: 0 }, // Official Audio
+  { id: 'fi-4', artist: 'PMMP', title: 'Rusketusraidat', year: 2003, youtubeId: 'b1zKr1kVSlM', startAt: 0 }, // Official Audio
+  { id: 'fi-5', artist: 'Maija Vilkkumaa', title: 'Satumaa-tango', year: 1999, youtubeId: 'tleJh6Y4FS4', startAt: 0 }, // Official Audio
+  { id: 'fi-6', artist: 'Robin', title: 'Frontside Ollie', year: 2012, youtubeId: 'JPCRtMjCGu4', startAt: 0 }, // Official Music Video
+  { id: 'fi-7', artist: 'Cheek', title: 'Timantit on ikuisia', year: 2013, youtubeId: 'v1YjcZ8KznM', startAt: 0 }, // Official Audio
+  { id: 'fi-8', artist: 'Jenni Vartiainen', title: 'Missä muruseni on', year: 2010, youtubeId: 'EUYD8EnVjcc', startAt: 0 }, // Official Audio
+  { id: 'fi-9', artist: 'Haloo Helsinki!', title: 'Maailman toisella puolen', year: 2011, youtubeId: 'Hx-F8QlU5pQ', startAt: 0 }, // Official Music Video
+  { id: 'fi-10', artist: 'JVG', title: 'Ikuinen vappu', year: 2019, youtubeId: 'hUnd1E2-un8', startAt: 0 }, // Official Music Video
 
   // --- 90-LUKU & DANCE ---
-  { id: 'fi-11', artist: 'Darude', title: 'Sandstorm', year: 1999, youtubeId: 'y6120QOlsfU', startAt: 25 },
-  { id: 'fi-12', artist: 'Bomfunk MC’s', title: 'Freestyler', year: 1999, youtubeId: 'ymNFyxvIdaM', startAt: 45 },
-  { id: 'fi-13', artist: 'Nylon Beat', title: 'Teflon love', year: 1995, youtubeId: 'L_pQjGgT7gA', startAt: 30 },
-  { id: 'fi-14', artist: 'Apulanta', title: 'Anna mulle piiskaa', year: 1997, youtubeId: 'oA8dYtI5yZ0', startAt: 40 },
-  { id: 'fi-15', artist: 'J. Karjalainen', title: 'Missä se Väinö on?', year: 1996, youtubeId: '0_zJd_s_jkE', startAt: 40 },
-  { id: 'fi-16', artist: 'Aikakone', title: 'Odota', year: 1995, youtubeId: '6jO2D_T0dck', startAt: 40 },
-  { id: 'fi-17', artist: 'Don Huonot', title: 'Hyvää yötä ja huomenta', year: 1997, youtubeId: '2qO4z6q_w0U', startAt: 40 },
-  { id: 'fi-18', artist: 'Ultra Bra', title: 'Sinä lähdit pois', year: 1997, youtubeId: 'mO4Y05b4sZg', startAt: 30 }, // Official Music Video
+  { id: 'fi-11', artist: 'Darude', title: 'Sandstorm', year: 1999, youtubeId: 'y6120QOlsfU', startAt: 0 }, // Official Music Video
+  { id: 'fi-12', artist: 'Bomfunk MC’s', title: 'Freestyler', year: 1999, youtubeId: 'ymNFyxvIdaM', startAt: 45 }, // Official Music Video (Skip intro)
+  { id: 'fi-13', artist: 'Nylon Beat', title: 'Teflon love', year: 1995, youtubeId: 'kzbnIm2BvxI', startAt: 0 }, // Official Audio
+  { id: 'fi-14', artist: 'Apulanta', title: 'Anna mulle piiskaa', year: 1997, youtubeId: '1-XoLyehHrQ', startAt: 0 }, // Official Audio
+  { id: 'fi-15', artist: 'J. Karjalainen', title: 'Missä se Väinö on?', year: 1996, youtubeId: 'il2RK1aymgo', startAt: 0 }, // Official Audio
+  { id: 'fi-16', artist: 'Aikakone', title: 'Odota', year: 1995, youtubeId: 'uHrRY3ghs0o', startAt: 0 }, // Official Audio
+  { id: 'fi-17', artist: 'Don Huonot', title: 'Hyvää yötä ja huomenta', year: 1997, youtubeId: 'ABcNdFXJsPw', startAt: 0 }, // Official Audio
+  { id: 'fi-18', artist: 'Ultra Bra', title: 'Sinä lähdit pois', year: 1997, youtubeId: '7g7SMsEETJE', startAt: 0 }, // Official Audio
 
   // --- 70- & 80-LUKU (KLASSIKOT) ---
-  // Note: Using official or reliable live versions where music videos are blocked
-  { id: 'fi-19', artist: 'Hurriganes', title: 'Get On', year: 1974, youtubeId: 'ZnwZnG8_h5c', startAt: 0 }, // Remastered Live
-  { id: 'fi-20', artist: 'Dingo', title: 'Autiotalo', year: 1984, youtubeId: 'sc3h7j6P_lE', startAt: 0 }, 
-  { id: 'fi-21', artist: 'Eppu Normaali', title: 'Murheellisten laulujen maa', year: 1982, youtubeId: '8t3rO_qJ-gE', startAt: 0 },
-  { id: 'fi-22', artist: 'Rauli Badding Somerjoki', title: 'Paratiisi', year: 1973, youtubeId: 'wZ-10Jj_J8', startAt: 0 }, // Topic Audio (Reliable)
-  { id: 'fi-23', artist: 'Juice Leskinen', title: 'Viidestoista yö', year: 1980, youtubeId: 'nJwbR7vC0yY', startAt: 0 }, 
-  { id: 'fi-24', artist: 'Pelle Miljoona Oy', title: 'Moottoritie on kuuma', year: 1980, youtubeId: 'AmFjAzf9q-0', startAt: 0 }, // Topic Audio
-  { id: 'fi-25', artist: 'Bogart Co.', title: 'All The Best Girls', year: 1985, youtubeId: 'p36Y1v4wKqg', startAt: 0 }, // Topic Audio
-  { id: 'fi-26', artist: 'Freeman', title: 'Ajetaan tandemilla', year: 1976, youtubeId: '84t3rO_qJ-gE', startAt: 0 }, // Often part of compilations, falling back to reliable upload
-  { id: 'fi-27', artist: 'Katri Helena', title: 'Puhelinlangat laulaa', year: 1964, youtubeId: 't2z4Wd4v9uY', startAt: 0 },
-  { id: 'fi-28', artist: 'Irwin Goodman', title: 'Ryysyranta', year: 1967, youtubeId: 'k7W-wZ-10Jj', startAt: 0 }, // Topic Audio
-  { id: 'fi-29', artist: 'Paula Koivuniemi', title: 'Aikuisnainen', year: 1982, youtubeId: 'oM4jWq3c1jA', startAt: 40 }, // Using reliable live/official
-  { id: 'fi-30', artist: 'Popeda', title: 'Kuuma kesä', year: 1985, youtubeId: 'Oq5L-l-5-l', startAt: 0 } // Using reliable
+  { id: 'fi-19', artist: 'Hurriganes', title: 'Get On', year: 1974, youtubeId: '_uAgd4jruRU', startAt: 0 }, // Audio
+  { id: 'fi-20', artist: 'Dingo', title: 'Autiotalo', year: 1984, youtubeId: 'MgVkL0igUY8', startAt: 0 }, // Official Audio
+  { id: 'fi-21', artist: 'Eppu Normaali', title: 'Murheellisten laulujen maa', year: 1982, youtubeId: 'dtxngkMozrA', startAt: 0 }, // Official Audio
+  { id: 'fi-22', artist: 'Rauli Badding Somerjoki', title: 'Paratiisi', year: 1973, youtubeId: '2YM3kFhebFw', startAt: 0 }, // Official Audio
+  { id: 'fi-23', artist: 'Juice Leskinen', title: 'Viidestoista yö', year: 1980, youtubeId: 'U_5yVIZDGMk', startAt: 0 }, // Official Audio
+  { id: 'fi-24', artist: 'Pelle Miljoona Oy', title: 'Moottoritie on kuuma', year: 1980, youtubeId: 'wnQ6T0Ex6y0', startAt: 0 }, // Official Audio
+  { id: 'fi-25', artist: 'Bogart Co.', title: 'All The Best Girls', year: 1985, youtubeId: 'rAxSqOg4ZME', startAt: 0 }, // Official Audio
+  { id: 'fi-26', artist: 'Freeman', title: 'Ajetaan tandemilla', year: 1976, youtubeId: 'RqZj8SL4Ho8', startAt: 0 }, // Lyric Video / Audio
+  { id: 'fi-27', artist: 'Katri Helena', title: 'Puhelinlangat laulaa', year: 1964, youtubeId: 'gnX1LWHVCXc', startAt: 0 }, // Official Audio
+  { id: 'fi-28', artist: 'Irwin Goodman', title: 'Ryysyranta', year: 1967, youtubeId: 'IdWXIB_Vwp8', startAt: 0 }, // Official Audio
+  { id: 'fi-29', artist: 'Paula Koivuniemi', title: 'Aikuisnainen', year: 1982, youtubeId: '3jR70T1lUQE', startAt: 0 }, // Music Video
+  { id: 'fi-30', artist: 'Popeda', title: 'Kuuma kesä', year: 1985, youtubeId: 'HwWghSUdQjg', startAt: 0 }, // Official Audio
 ];
