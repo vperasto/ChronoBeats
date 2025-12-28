@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { X, Wrench, Copy, Trash2, PlayCircle, Loader2, AlertTriangle, StopCircle } from 'lucide-react';
+import { X, Wrench, Copy, Trash2, PlayCircle, Loader2, AlertTriangle, StopCircle, Lock, Key } from 'lucide-react';
 import { Song } from '../types';
 import { SONGS, FINNISH_SONGS } from '../constants';
 
@@ -10,6 +10,8 @@ interface MaintenanceConsoleProps {
 
 export const MaintenanceConsole: React.FC<MaintenanceConsoleProps> = ({ isOpen, onClose }) => {
   const [brokenSongs, setBrokenSongs] = useState<Song[]>([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState('');
   
   // Diagnostics State
   const [isTesting, setIsTesting] = useState(false);
@@ -21,8 +23,22 @@ export const MaintenanceConsole: React.FC<MaintenanceConsoleProps> = ({ isOpen, 
   useEffect(() => {
     if (isOpen) {
       loadBrokenList();
+    } else {
+        // Reset auth when modal closes for security
+        setIsAuthenticated(false);
+        setPassword('');
     }
   }, [isOpen]);
+
+  const handlePasswordSubmit = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (password.toLowerCase() === 'crimescene') {
+        setIsAuthenticated(true);
+    } else {
+        alert("Väärä salasana.");
+        setPassword('');
+    }
+  };
 
   const loadBrokenList = () => {
     const stored = localStorage.getItem('chrono_broken_songs');
@@ -112,9 +128,6 @@ export const MaintenanceConsole: React.FC<MaintenanceConsoleProps> = ({ isOpen, 
     let currentFailedCount = 0;
     const newBrokenList: Song[] = [];
 
-    // Keep existing broken songs? Maybe better to start fresh or merge.
-    // Let's merge active broken ones later.
-    
     for (let i = 0; i < uniqueSongs.length; i++) {
         if (abortControllerRef.current) break;
 
@@ -179,90 +192,120 @@ export const MaintenanceConsole: React.FC<MaintenanceConsoleProps> = ({ isOpen, 
           <Wrench className="w-6 h-6" /> Huoltokonsoli
         </h2>
 
-        {/* DIAGNOSTICS PANEL */}
-        <div className="mb-6 p-4 bg-stone-100 border-2 border-black">
-            <h3 className="font-bold text-sm uppercase mb-2 flex items-center gap-2">
-                <AlertTriangle className="w-4 h-4" /> Diagnostiikka
-            </h3>
-            
-            {!isTesting ? (
-                <button 
-                    onClick={runDiagnostics}
-                    className="w-full bg-black text-white p-3 font-bold text-xs uppercase tracking-widest hover:bg-stone-800 transition-colors flex items-center justify-center gap-2"
-                >
-                    <PlayCircle className="w-4 h-4" /> Tarkista kaikki biisit (n. 5min)
-                </button>
-            ) : (
-                <div className="space-y-3">
-                    <div className="flex justify-between text-xs font-mono font-bold">
-                        <span>Edistyminen: {testProgress.current} / {testProgress.total}</span>
-                        <span className="text-red-600">Virheet: {testProgress.failed}</span>
-                    </div>
-                    <div className="w-full bg-white h-4 border border-black relative">
-                        <div 
-                            className="bg-green-500 h-full transition-all duration-300" 
-                            style={{ width: `${(testProgress.current / testProgress.total) * 100}%` }}
-                        ></div>
-                    </div>
-                    <div className="text-[10px] font-mono truncate animate-pulse">
-                        Testataan: {currentTestSong}
-                    </div>
-                    <button 
-                        onClick={stopDiagnostics}
-                        className="w-full bg-red-100 text-red-900 border border-red-900 p-2 font-bold text-xs uppercase hover:bg-red-200 flex items-center justify-center gap-2"
-                    >
-                        <StopCircle className="w-4 h-4" /> Keskeytä
-                    </button>
+        {!isAuthenticated ? (
+            /* PASSWORD ENTRY */
+            <div className="flex-1 flex flex-col items-center justify-center py-12 gap-6 text-center">
+                <div className="w-16 h-16 rounded-full bg-stone-100 flex items-center justify-center border-2 border-black">
+                    <Lock className="w-8 h-8" />
                 </div>
-            )}
-        </div>
-
-        <p className="text-sm mb-2 font-bold">Raportoidut virheet:</p>
-        
-        <div className="bg-stone-100 border-2 border-black p-4 mb-4 flex-1 overflow-y-auto font-mono text-xs min-h-[150px]">
-          {brokenSongs.length === 0 ? (
-            <p className="opacity-50 italic">Ei viallisia biisejä listalla.</p>
-          ) : (
-            brokenSongs.map((song, idx) => (
-              <div key={idx} className="mb-2 border-b border-black/10 pb-2 flex justify-between items-start gap-2">
                 <div>
-                    <div className="font-bold text-red-600">VIRHE: {song.id}</div>
-                    <div>{song.artist} - {song.title}</div>
-                    <div className="text-[10px] opacity-70 break-all">https://youtu.be/{song.youtubeId}</div>
+                    <h3 className="font-bold uppercase tracking-widest text-sm mb-1">Pääsy rajoitettu</h3>
+                    <p className="text-xs opacity-60">Syötä huoltosalasana jatkaaksesi.</p>
                 </div>
-                <a 
-                   href={`https://www.youtube.com/watch?v=${song.youtubeId}`} 
-                   target="_blank" 
-                   rel="noopener noreferrer"
-                   className="text-blue-600 underline text-[10px] shrink-0"
-                >
-                    Linkki
-                </a>
-              </div>
-            ))
-          )}
-        </div>
+                <form onSubmit={handlePasswordSubmit} className="w-full max-w-xs flex flex-col gap-2">
+                    <input 
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="SALASANA"
+                        className="w-full bg-stone-100 border-2 border-black p-3 font-mono text-center focus:outline-none focus:bg-white transition-colors"
+                        autoFocus
+                    />
+                    <button 
+                        type="submit"
+                        className="w-full bg-black text-white py-3 font-bold uppercase tracking-widest text-xs hover:bg-stone-800 transition-colors"
+                    >
+                        Kirjaudu sisään
+                    </button>
+                </form>
+            </div>
+        ) : (
+            /* ACTUAL CONTENT (Authenticated) */
+            <>
+                {/* DIAGNOSTICS PANEL */}
+                <div className="mb-6 p-4 bg-stone-100 border-2 border-black">
+                    <h3 className="font-bold text-sm uppercase mb-2 flex items-center gap-2">
+                        <AlertTriangle className="w-4 h-4" /> Diagnostiikka
+                    </h3>
+                    
+                    {!isTesting ? (
+                        <button 
+                            onClick={runDiagnostics}
+                            className="w-full bg-black text-white p-3 font-bold text-xs uppercase tracking-widest hover:bg-stone-800 transition-colors flex items-center justify-center gap-2"
+                        >
+                            <PlayCircle className="w-4 h-4" /> Tarkista kaikki biisit (n. 5min)
+                        </button>
+                    ) : (
+                        <div className="space-y-3">
+                            <div className="flex justify-between text-xs font-mono font-bold">
+                                <span>Edistyminen: {testProgress.current} / {testProgress.total}</span>
+                                <span className="text-red-600">Virheet: {testProgress.failed}</span>
+                            </div>
+                            <div className="w-full bg-white h-4 border border-black relative">
+                                <div 
+                                    className="bg-green-500 h-full transition-all duration-300" 
+                                    style={{ width: `${(testProgress.current / testProgress.total) * 100}%` }}
+                                ></div>
+                            </div>
+                            <div className="text-[10px] font-mono truncate animate-pulse">
+                                Testataan: {currentTestSong}
+                            </div>
+                            <button 
+                                onClick={stopDiagnostics}
+                                className="w-full bg-red-100 text-red-900 border border-red-900 p-2 font-bold text-xs uppercase hover:bg-red-200 flex items-center justify-center gap-2"
+                            >
+                                <StopCircle className="w-4 h-4" /> Keskeytä
+                            </button>
+                        </div>
+                    )}
+                </div>
 
-        <div className="flex gap-2">
-          <button 
-            onClick={copyBrokenList}
-            disabled={brokenSongs.length === 0}
-            className="flex-1 bg-white text-black p-3 font-bold border-2 border-black disabled:opacity-50 flex items-center justify-center gap-2 hover:bg-stone-100 text-xs uppercase"
-          >
-            <Copy className="w-4 h-4" /> Kopioi lista
-          </button>
-          <button 
-            onClick={clearBrokenList}
-            disabled={brokenSongs.length === 0}
-            className="px-4 bg-white text-black p-3 font-bold border-2 border-black hover:bg-red-100 disabled:opacity-50"
-            title="Tyhjennä lista"
-          >
-            <Trash2 className="w-4 h-4" />
-          </button>
-        </div>
+                <p className="text-sm mb-2 font-bold">Raportoidut virheet:</p>
+                
+                <div className="bg-stone-100 border-2 border-black p-4 mb-4 flex-1 overflow-y-auto font-mono text-xs min-h-[150px]">
+                {brokenSongs.length === 0 ? (
+                    <p className="opacity-50 italic">Ei viallisia biisejä listalla.</p>
+                ) : (
+                    brokenSongs.map((song, idx) => (
+                    <div key={idx} className="mb-2 border-b border-black/10 pb-2 flex justify-between items-start gap-2">
+                        <div>
+                            <div className="font-bold text-red-600">VIRHE: {song.id}</div>
+                            <div>{song.artist} - {song.title}</div>
+                            <div className="text-[10px] opacity-70 break-all">https://youtu.be/{song.youtubeId}</div>
+                        </div>
+                        <a 
+                        href={`https://www.youtube.com/watch?v=${song.youtubeId}`} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-blue-600 underline text-[10px] shrink-0"
+                        >
+                            Linkki
+                        </a>
+                    </div>
+                    ))
+                )}
+                </div>
+
+                <div className="flex gap-2">
+                <button 
+                    onClick={copyBrokenList}
+                    disabled={brokenSongs.length === 0}
+                    className="flex-1 bg-white text-black p-3 font-bold border-2 border-black disabled:opacity-50 flex items-center justify-center gap-2 hover:bg-stone-100 text-xs uppercase"
+                >
+                    <Copy className="w-4 h-4" /> Kopioi lista
+                </button>
+                <button 
+                    onClick={clearBrokenList}
+                    disabled={brokenSongs.length === 0}
+                    className="px-4 bg-white text-black p-3 font-bold border-2 border-black hover:bg-red-100 disabled:opacity-50"
+                    title="Tyhjennä lista"
+                >
+                    <Trash2 className="w-4 h-4" />
+                </button>
+                </div>
+            </>
+        )}
       </div>
-      
-      {/* Hidden container for diagnostic player will be appended to body dynamically */}
     </div>
   );
 };
@@ -300,10 +343,6 @@ async function testSingleSong(player: any, song: Song): Promise<void> {
         setTimeout(() => {
             if (!isComplete) {
                 isComplete = true;
-                // If we are still buffering (3) or unstarted (-1), it's suspicious but maybe just slow net.
-                // However, usually blocked videos fire onError fast.
-                // If it plays eventually, onStateChange handles it.
-                // If it hangs forever, we reject.
                 const state = player.getPlayerState();
                 if (state === 1) {
                     resolve();
