@@ -18,6 +18,16 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ youtubeId, startAt, is
   const playerRef = useRef<any>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const isReadyRef = useRef(false);
+  
+  // Create a ref to store the latest version of the error callback.
+  // This prevents 'stale closure' issues where the YT player (initialized once)
+  // tries to call an old version of the function that doesn't know the current song.
+  const onPlayErrorRef = useRef(onPlayError);
+
+  // Update the ref whenever the prop changes
+  useEffect(() => {
+    onPlayErrorRef.current = onPlayError;
+  }, [onPlayError]);
 
   useEffect(() => {
     // 1. Load the IFrame Player API code asynchronously if not present.
@@ -57,7 +67,10 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ youtubeId, startAt, is
           'onReady': onPlayerReady,
           'onError': (e: any) => {
              console.error("YouTube Player Error Code:", e.data);
-             if (onPlayError) onPlayError();
+             // Always call the LATEST version of the callback via the ref
+             if (onPlayErrorRef.current) {
+                onPlayErrorRef.current();
+             }
           }
         }
       });
