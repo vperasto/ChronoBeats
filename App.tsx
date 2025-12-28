@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { SONGS, WINNING_SCORE } from './constants';
+import { SONGS, FINNISH_SONGS, WINNING_SCORE } from './constants';
 import { GamePhase, GameState, Player, Song, Challenge } from './types';
 import { SetupScreen } from './components/SetupScreen';
 import { Card } from './components/Card';
@@ -70,13 +70,19 @@ export default function App() {
   const [bonusAwarded, setBonusAwarded] = useState(false);
   const [playError, setPlayError] = useState(false);
   const [showMaintenance, setShowMaintenance] = useState(false);
+  const [isFinnishGame, setIsFinnishGame] = useState(false);
   
   // State to control the visual "Slide out" animation. 
   // We separate this from GamePhase.REVEAL to allow the card to flip first.
   const [showAnalysisPanel, setShowAnalysisPanel] = useState(false);
 
-  const startGame = (names: string[]) => {
-    const shuffledDeck = shuffle(SONGS);
+  const startGame = (names: string[], isFinnishMode = false) => {
+    setIsFinnishGame(isFinnishMode);
+    
+    // Select Deck
+    const sourceDeck = isFinnishMode ? FINNISH_SONGS : SONGS;
+    const shuffledDeck = shuffle(sourceDeck);
+    
     const initialPlayers: Player[] = names.map((name, i) => ({
       id: `p-${i}`,
       name,
@@ -120,6 +126,7 @@ export default function App() {
       challenger: null
     });
     setIsPlaying(false);
+    setIsFinnishGame(false);
   };
 
   const currentPlayer = gameState.players[gameState.currentPlayerIndex];
@@ -261,6 +268,10 @@ export default function App() {
 
   // --- Render Helpers ---
 
+  // Generate the marquee text string. Guard against undefined currentPlayer during SETUP.
+  // Using simplified text (Just name) and reduced array length since font is massive.
+  const marqueeText = currentPlayer ? Array(8).fill(`${currentPlayer.name.toUpperCase()}          `).join('') : '';
+
   const MobileWarning = () => (
     <div className="md:hidden h-screen w-screen flex flex-col items-center justify-center p-8 text-center bg-stone-100 text-black">
       <Smartphone className="w-16 h-16 mb-4 text-stone-400" />
@@ -312,9 +323,11 @@ export default function App() {
       <div className="hidden md:flex flex-col h-[100dvh] w-screen p-4 overflow-hidden">
         
         {/* HUD - Compact Header */}
-        <header className="shrink-0 flex justify-between items-center gap-4 mb-2 border-b-[3px] border-black pb-2 h-16">
+        <header className="shrink-0 flex justify-between items-center gap-4 mb-2 border-b-[3px] border-black pb-2 h-16 relative z-30 bg-white">
           <div className="flex flex-col">
-            <h2 className="text-xl font-bold tracking-tighter leading-none">CHRONOBEATS // VINYL EDITION</h2>
+            <h2 className="text-xl font-bold tracking-tighter leading-none">
+                CHRONOBEATS // {isFinnishGame ? 'SUOMI EDITION 🇫🇮' : 'VINYL EDITION'}
+            </h2>
             <div className="flex gap-2 mt-1">
               <span className="bg-black text-white px-2 text-[10px] font-bold uppercase py-0.5">Vuorossa</span>
               <span className="border border-black px-2 text-[10px] font-bold uppercase py-0.5">{currentPlayer.name}</span>
@@ -354,11 +367,20 @@ export default function App() {
         )}
 
         {/* Center Stage: Flex-1 to take available space, min-h-0 to allow shrinking. ADDED bg-vinyl-pattern HERE. */}
-        <main className="flex-1 min-h-0 flex items-center justify-center relative w-full perspective-1000 mb-2 bg-vinyl-pattern">
+        <main className="flex-1 min-h-0 flex items-center justify-center relative w-full perspective-1000 mb-2 bg-vinyl-pattern overflow-hidden">
           
+          {/* BACKGROUND MARQUEE LAYER */}
+          <div className="absolute inset-0 z-0 flex items-center pointer-events-none opacity-[0.15] overflow-hidden select-none">
+             {/* Massive text size (40vh) */}
+             <div className={`whitespace-nowrap animate-marquee flex text-[40vh] font-black tracking-tighter leading-none ${isFinnishGame ? 'text-blue-900 opacity-[0.08]' : ''}`}>
+                <span className="mx-4">{marqueeText}</span>
+                <span className="mx-4">{marqueeText}</span>
+             </div>
+          </div>
+
           {/* Active Game Area */}
           {gameState.currentCard && (
-            <div className="flex items-center justify-center transition-all duration-700 ease-in-out gap-0 h-full">
+            <div className="flex items-center justify-center transition-all duration-700 ease-in-out gap-0 h-full relative z-20">
               
               {/* LEFT SIDE: The Card */}
               <div className={`
@@ -468,7 +490,7 @@ export default function App() {
         </main>
 
         {/* Timeline Area - FIXED HEIGHT & COMPACT SLOTS */}
-        <div className="shrink-0 h-[170px] border-t-2 border-black pt-1 bg-stone-50 flex flex-col">
+        <div className="shrink-0 h-[170px] border-t-2 border-black pt-1 bg-stone-50 flex flex-col relative z-30">
           <div className="flex justify-between items-end px-2 mb-1">
             <h4 className="font-bold uppercase tracking-tighter text-xs">Aikajana: {currentPlayer.name}</h4>
             <div className="text-[10px]">KORTIT: {currentPlayer.timeline.length + 1}</div>

@@ -3,13 +3,17 @@ import { Users, Plus, X, Play, Wrench } from 'lucide-react';
 import { MaintenanceConsole } from './MaintenanceConsole';
 
 interface SetupScreenProps {
-  onStartGame: (names: string[]) => void;
+  onStartGame: (names: string[], isFinnishMode?: boolean) => void;
 }
 
 export const SetupScreen: React.FC<SetupScreenProps> = ({ onStartGame }) => {
   const [names, setNames] = useState<string[]>(['Pelaaja 1', 'Pelaaja 2']);
   const [newName, setNewName] = useState('');
   const [showMaintenance, setShowMaintenance] = useState(false);
+  
+  // Easter Egg States
+  const [eggCount, setEggCount] = useState(0);
+  const [isFinnishMode, setIsFinnishMode] = useState(false);
 
   const addPlayer = () => {
     if (newName.trim()) {
@@ -34,15 +38,26 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({ onStartGame }) => {
     // Filter out empty names
     const validNames = names.filter(n => n.trim().length > 0);
     if (validNames.length >= 2) {
-      onStartGame(validNames);
+      onStartGame(validNames, isFinnishMode);
     } else {
         alert("Tarvitaan vähintään kaksi pelaajaa, joilla on nimet!");
     }
   };
 
+  const handleEasterEggClick = () => {
+    if (isFinnishMode) return;
+    
+    const newCount = eggCount + 1;
+    setEggCount(newCount);
+    
+    if (newCount === 5) {
+      setIsFinnishMode(true);
+    }
+  };
+
   return (
     <div className="max-w-xl mx-auto w-full p-6">
-      <div className="bg-white border-2 border-black shadow-hard-lg p-8 mb-8 relative">
+      <div className={`border-2 border-black shadow-hard-lg p-8 mb-8 relative transition-colors duration-500 ${isFinnishMode ? 'bg-blue-50' : 'bg-white'}`}>
         {/* Maintenance Button */}
         <button 
           onClick={() => setShowMaintenance(true)}
@@ -52,8 +67,13 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({ onStartGame }) => {
         </button>
 
         <h1 className="text-4xl font-serif font-black text-center mb-2 uppercase tracking-tight mt-4">Chrono<br/>Beats</h1>
-        <p className="text-center font-mono text-sm border-y-2 border-black py-2 mb-6 uppercase">
-          Vinyl Edition
+        
+        {/* Easter Egg Trigger */}
+        <p 
+          onClick={handleEasterEggClick}
+          className={`text-center font-mono text-sm border-y-2 border-black py-2 mb-6 uppercase cursor-pointer select-none transition-all duration-300 ${isFinnishMode ? 'text-blue-600 font-black tracking-widest scale-105' : 'hover:tracking-widest'}`}
+        >
+          {isFinnishMode ? '🇫🇮 SUOMI EDITION 🇫🇮' : 'Vinyl Edition'}
         </p>
 
         <div className="space-y-4 mb-8">
@@ -110,9 +130,9 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({ onStartGame }) => {
 
         <button 
           onClick={handleStart}
-          className="w-full bg-black text-white py-4 font-bold text-xl uppercase tracking-widest border-2 border-black shadow-hard hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all flex items-center justify-center gap-3"
+          className={`w-full text-white py-4 font-bold text-xl uppercase tracking-widest border-2 border-black shadow-hard hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all flex items-center justify-center gap-3 ${isFinnishMode ? 'bg-blue-600' : 'bg-black'}`}
         >
-          <span>Aloita tehtävä</span>
+          <span>{isFinnishMode ? 'Aloita Suomipeli' : 'Aloita tehtävä'}</span>
           <Play className="w-5 h-5" />
         </button>
       </div>
@@ -121,7 +141,7 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({ onStartGame }) => {
         <p>Suositus 2-10 pelaajaa • Äänet vaaditaan</p>
         
         <div className="border-t-2 border-black/10 pt-4 mt-6 w-full">
-            <p className="font-bold mb-2">© 2025 VESA PERASTO // CHRONOBEATS VINYL EDITION</p>
+            <p className="font-bold mb-2">© 2025 VESA PERASTO // CHRONOBEATS {isFinnishMode ? 'SUOMI' : 'VINYL'} EDITION</p>
             <p className="text-[10px] leading-tight opacity-70 max-w-lg mx-auto">
                 Musiikki toistetaan YouTuben kautta (YouTube IFrame API). Sovellus ei isännöi tai omista musiikkikappaleita tai niiden oikeuksia. Kaikki oikeudet kuuluvat kappaleiden alkuperäisille omistajille.
             </p>

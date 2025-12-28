@@ -19,6 +19,15 @@
             boxShadow: {
               'eink': '2px 2px 0px 0px rgba(0,0,0,1)',
               'eink-lg': '4px 4px 0px 0px rgba(0,0,0,1)',
+            },
+            animation: {
+              'marquee': 'marquee 180s linear infinite',
+            },
+            keyframes: {
+              marquee: {
+                '0%': { transform: 'translateX(0%)' },
+                '100%': { transform: 'translateX(-50%)' },
+              }
             }
           }
         }
@@ -35,10 +44,10 @@
       .eink-bg {
         background-image: url("data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 3h1v1H1V3zm2-2h1v1H3V1z' fill='%23000' fill-opacity='0.05'/%3E%3C/svg%3E");
       }
-      /* New Vinyl Pattern for Main Stage */
+      /* New Vinyl Pattern for Main Stage - Opacity lowered to 0.04 */
       .bg-vinyl-pattern {
         background-color: #f5f5f4; /* stone-100 fallback */
-        background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.08'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23111' /%3E%3Ccircle cx='50' cy='50' r='40' stroke='%23333' stroke-width='1' fill='none' /%3E%3Ccircle cx='50' cy='50' r='35' stroke='%23333' stroke-width='1' fill='none' /%3E%3Ccircle cx='50' cy='50' r='30' stroke='%23333' stroke-width='1' fill='none' /%3E%3Ccircle cx='50' cy='50' r='25' stroke='%23333' stroke-width='1' fill='none' /%3E%3Ccircle cx='50' cy='50' r='18' fill='%23d97706' stroke='%23000' stroke-width='1' /%3E%3Ccircle cx='50' cy='50' r='4' fill='%23fff' stroke='%23000' stroke-width='1' /%3E%3C/g%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.04'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23111' /%3E%3Ccircle cx='50' cy='50' r='40' stroke='%23333' stroke-width='1' fill='none' /%3E%3Ccircle cx='50' cy='50' r='35' stroke='%23333' stroke-width='1' fill='none' /%3E%3Ccircle cx='50' cy='50' r='30' stroke='%23333' stroke-width='1' fill='none' /%3E%3Ccircle cx='50' cy='50' r='25' stroke='%23333' stroke-width='1' fill='none' /%3E%3Ccircle cx='50' cy='50' r='18' fill='%23d97706' stroke='%23000' stroke-width='1' /%3E%3Ccircle cx='50' cy='50' r='4' fill='%23fff' stroke='%23000' stroke-width='1' /%3E%3C/g%3E%3C/svg%3E");
       }
       .cursor-pixel { cursor: crosshair; }
       @keyframes blink { 50% { opacity: 0; } }
