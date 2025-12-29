@@ -177,7 +177,10 @@ export default function App() {
   const checkSlotCorrect = (song: Song, timeline: Song[], slotIndex: number | null): boolean => {
     if (slotIndex === null) return false;
     const year = song.year;
+    // Strict checks:
+    // Must be >= Previous Card's Year
     if (slotIndex > 0 && year < timeline[slotIndex - 1].year) return false;
+    // Must be <= Next Card's Year
     if (slotIndex < timeline.length && year > timeline[slotIndex].year) return false;
     return true;
   };
@@ -218,22 +221,35 @@ export default function App() {
     let updatedPlayers = [...players];
 
     if (isActiveCorrect && activePlayerSlot !== null) {
+      // Active player explicitly chose a slot, so we put it there.
       updatedPlayers[currentPlayerIndex] = {
         ...activePlayer,
         timeline: insertIntoTimeline(activePlayer.timeline, currentCard, activePlayerSlot),
         score: activePlayer.timeline.length + 1
       };
     } else if (challenger) {
-      const challengerPlayer = players.find(p => p.id === challenger.playerId)!;
-      // Challenger steals logic
+      // Challenger logic
       const isChallengerCorrect = checkSlotCorrect(currentCard, activePlayer.timeline, challenger.slotIndex);
       
       if (isChallengerCorrect) {
-        updatedPlayers = updatedPlayers.map(p => 
-          p.id === challenger.playerId 
-            ? { ...p, timeline: insertIntoTimeline(p.timeline, currentCard, p.timeline.length), score: p.timeline.length + 1 } 
-            : p
-        );
+        // If challenger steals, we must AUTO-SORT the card into THEIR timeline.
+        // We cannot use 'slotIndex' here because that referred to the Active Player's timeline.
+        
+        updatedPlayers = updatedPlayers.map(p => {
+          if (p.id === challenger.playerId) {
+             // Find correct chronological spot
+             let autoIndex = p.timeline.findIndex(s => s.year > currentCard.year);
+             // If no song is newer (index -1), append to end
+             if (autoIndex === -1) autoIndex = p.timeline.length;
+             
+             return { 
+                 ...p, 
+                 timeline: insertIntoTimeline(p.timeline, currentCard, autoIndex), 
+                 score: p.timeline.length + 1 
+             };
+          }
+          return p;
+        });
       }
     }
 
@@ -289,12 +305,12 @@ export default function App() {
       // Color & Opacity variants
       // Note: We use specific text colors but keep opacity consistent (approx 10-15% visual weight)
       if (activeGameMode === 'mix') {
-          return `${base} text-purple-900/10`; // Ultimate Mix: Purple
+          return `${base} text-purple-900 opacity-10`; // Ultimate Mix: Purple
       }
       if (activeGameMode === 'fi') {
-          return `${base} text-blue-900/10`; // Suomi: Blue
+          return `${base} text-blue-900 opacity-10`; // Suomi: Blue
       }
-      return `${base} text-black/10`; // Default: Black
+      return `${base} text-black opacity-5`; // Default: Black
   };
 
   const getHeaderTitle = () => {
@@ -545,74 +561,87 @@ export default function App() {
                 const canChallengeHere = gameState.phase === GamePhase.CHALLENGING && !isSelected; 
                 const isInteractive = canPlaceHere || canChallengeHere;
 
+                // --- NEW LOGIC: HIDE INTERNAL SLOTS ---
+                const prevSong = idx > 0 ? currentPlayer.timeline[idx - 1] : null;
+                const nextSong = idx < currentPlayer.timeline.length ? currentPlayer.timeline[idx] : null;
+                
+                // Hide slot if it's "inside" a year block (same year before and after)
+                // UNLESS it's the active selection or has a challenge (we must show interaction results)
+                const isSameYearBlock = prevSong && nextSong && prevSong.year === nextSong.year;
+                const hasActivity = isSelected || isChallenged || (isRevealed && isCorrectPlacement);
+                
+                const shouldRenderSlot = !isSameYearBlock || hasActivity;
+
                 return (
                   <React.Fragment key={`slot-${idx}`}>
                     {/* COMPACT SLOT / DROP ZONE */}
-                    <div className="h-full flex flex-col justify-center items-center px-0.5">
-                      {isCorrectPlacement ? (
-                        // If guess is correct, show the card immediately (Animation)
-                         <Card song={gameState.currentCard!} variant="timeline" revealed={true} className="shrink-0 shadow-eink animate-in fade-in zoom-in duration-300 mx-1" />
-                      ) : (
-                        // INTERACTIVE SLOT BAR
-                        <div className={`
-                          relative transition-all duration-200 flex items-center justify-center
-                          ${isSelected ? 'w-12 bg-black text-white' : 'w-4 hover:w-10 bg-stone-200 text-stone-400 hover:text-black hover:bg-stone-300'}
-                          ${isChallenged ? 'ring-2 ring-yellow-400 z-10 w-10' : ''}
-                          ${canPlaceHere ? 'cursor-pointer group' : ''}
-                          ${!isInteractive && !isSelected ? 'pointer-events-none opacity-50' : ''}
-                          h-24 md:h-32 rounded-sm
-                        `}>
-                          
-                          {/* 1. LOCKED VISUALS (Always visible if selected) */}
-                          {isSelected && (
-                               <div className="absolute inset-0 w-full h-full flex flex-col items-center gap-1 py-2 z-10">
-                                  <Lock className="w-3 h-3 text-white" />
-                                  <span className="flex-1 [writing-mode:vertical-rl] rotate-180 text-[10px] font-bold tracking-[0.2em] flex items-center justify-center text-white">
-                                    LUKITTU
-                                  </span>
-                                  <CheckCircle className="w-3 h-3 text-white" />
-                               </div>
-                          )}
+                    {shouldRenderSlot && (
+                        <div className="h-full flex flex-col justify-center items-center px-0.5">
+                          {isCorrectPlacement ? (
+                            // If guess is correct, show the card immediately (Animation)
+                             <Card song={gameState.currentCard!} variant="timeline" revealed={true} className="shrink-0 shadow-eink animate-in fade-in zoom-in duration-300 mx-1" />
+                          ) : (
+                            // INTERACTIVE SLOT BAR
+                            <div className={`
+                              relative transition-all duration-200 flex items-center justify-center
+                              ${isSelected ? 'w-12 bg-black text-white' : 'w-4 hover:w-10 bg-stone-200 text-stone-400 hover:text-black hover:bg-stone-300'}
+                              ${isChallenged ? 'ring-2 ring-yellow-400 z-10 w-10' : ''}
+                              ${canPlaceHere ? 'cursor-pointer group' : ''}
+                              ${!isInteractive && !isSelected ? 'pointer-events-none opacity-50' : ''}
+                              h-24 md:h-32 rounded-sm
+                            `}>
+                              
+                              {/* 1. LOCKED VISUALS (Always visible if selected) */}
+                              {isSelected && (
+                                   <div className="absolute inset-0 w-full h-full flex flex-col items-center gap-1 py-2 z-10">
+                                      <Lock className="w-3 h-3 text-white" />
+                                      <span className="flex-1 [writing-mode:vertical-rl] rotate-180 text-[10px] font-bold tracking-[0.2em] flex items-center justify-center text-white">
+                                        LUKITTU
+                                      </span>
+                                      <CheckCircle className="w-3 h-3 text-white" />
+                                   </div>
+                              )}
 
-                          {/* 2. PLACEMENT BUTTON (Listening phase only) */}
-                          {canPlaceHere && (
-                               <button 
-                                  onClick={() => handleActivePlacement(idx)} 
-                                  className="absolute inset-0 w-full h-full flex items-center justify-center focus:outline-none z-20"
-                               >
-                                 <Plus className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity"/>
-                               </button>
-                          )}
+                              {/* 2. PLACEMENT BUTTON (Listening phase only) */}
+                              {canPlaceHere && (
+                                   <button 
+                                      onClick={() => handleActivePlacement(idx)} 
+                                      className="absolute inset-0 w-full h-full flex items-center justify-center focus:outline-none z-20"
+                                   >
+                                     <Plus className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity"/>
+                                   </button>
+                              )}
 
-                          {/* 3. CHALLENGE OVERLAY (Challenging phase) */}
-                          {gameState.phase === GamePhase.CHALLENGING && !isSelected && (
-                              <div className="absolute inset-0 w-full h-full z-30 pointer-events-none flex items-center justify-center">
-                                  {gameState.players.map(p => (
-                                    p.id !== currentPlayer.id && p.tokens > 0 && (
-                                       <button 
-                                          key={p.id} 
-                                          onClick={() => handleChallenge(p.id, idx)} 
-                                          className={`
-                                            absolute
-                                            w-8 h-8 rounded-full flex items-center justify-center
-                                            bg-yellow-400 text-black border border-black shadow-sm
-                                            hover:scale-110 transition-transform pointer-events-auto
-                                            ${gameState.challenger?.playerId === p.id && gameState.challenger?.slotIndex === idx ? 'ring-2 ring-black scale-110 z-40' : 'z-30'}
-                                          `}
-                                          title={`${p.name}: Haasta!`}
-                                       >
-                                         <Zap className="w-4 h-4" />
-                                       </button>
-                                    )
-                                  ))}
-                              </div>
+                              {/* 3. CHALLENGE OVERLAY (Challenging phase) */}
+                              {gameState.phase === GamePhase.CHALLENGING && !isSelected && (
+                                  <div className="absolute inset-0 w-full h-full z-30 pointer-events-none flex items-center justify-center">
+                                      {gameState.players.map(p => (
+                                        p.id !== currentPlayer.id && p.tokens > 0 && (
+                                           <button 
+                                              key={p.id} 
+                                              onClick={() => handleChallenge(p.id, idx)} 
+                                              className={`
+                                                absolute
+                                                w-8 h-8 rounded-full flex items-center justify-center
+                                                bg-yellow-400 text-black border border-black shadow-sm
+                                                hover:scale-110 transition-transform pointer-events-auto
+                                                ${gameState.challenger?.playerId === p.id && gameState.challenger?.slotIndex === idx ? 'ring-2 ring-black scale-110 z-40' : 'z-30'}
+                                              `}
+                                              title={`${p.name}: Haasta!`}
+                                           >
+                                             <Zap className="w-4 h-4" />
+                                           </button>
+                                        )
+                                      ))}
+                                  </div>
+                              )}
+                              
+                              {/* Marker Icons */}
+                              {isRevealed && isSelected && <User className="w-4 h-4 absolute top-1 right-1 z-20 text-white"/>}
+                            </div>
                           )}
-                          
-                          {/* Marker Icons */}
-                          {isRevealed && isSelected && <User className="w-4 h-4 absolute top-1 right-1 z-20 text-white"/>}
                         </div>
-                      )}
-                    </div>
+                    )}
 
                     {/* EXISTING CARD IN TIMELINE */}
                     {idx < currentPlayer.timeline.length && (
