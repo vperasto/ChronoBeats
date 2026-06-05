@@ -179,11 +179,9 @@ export const Card: React.FC<CardProps> = ({ song, revealed = false, className = 
             <div className={`font-bold uppercase mb-1 leading-tight break-words px-1 line-clamp-2 ${textSize}`}>
               {song.artist}
             </div>
-            {!isTimeline && (
-                <div className={`italic leading-tight break-words px-1 ${isLarge ? 'text-lg' : 'text-[10px]'}`}>
-                "{song.title}"
-                </div>
-            )}
+            <div className={`italic leading-tight break-words px-1 ${isLarge ? 'text-lg' : (isTimeline ? 'text-[8px] line-clamp-3' : 'text-[10px]')}`}>
+              "{song.title}"
+            </div>
           </div>
 
           <div className={`w-full mt-auto border-t-[3px] border-black pt-1 font-bold z-10 ${yearSize}`}>

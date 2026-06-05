@@ -3,6 +3,33 @@ import { Song } from './types';
 export const WINNING_SCORE = 10;
 
 export const SONGS: Song[] = [
+  // --- MODERNIT (2000s, 2010s, 2020s) ---
+  { id: '20s-1', artist: 'The Killers', title: 'Mr. Brightside', year: 2003, youtubeId: 'gGdGFtwCNBE', startAt: 30 },
+  { id: '20s-2', artist: 'Outkast', title: 'Hey Ya!', year: 2003, youtubeId: 'PWgvGjAhvIw', startAt: 30 },
+  { id: '20s-3', artist: 'Eminem', title: 'Lose Yourself', year: 2002, youtubeId: 'xFYQQPAOz7Y', startAt: 30 },
+  { id: '20s-4', artist: 'Beyoncé', title: 'Crazy In Love', year: 2003, youtubeId: 'ViwtNLUqkMY', startAt: 30 },
+  { id: '20s-5', artist: 'Green Day', title: 'American Idiot', year: 2004, youtubeId: 'Ee_uujKuJMI', startAt: 30 },
+  { id: '20s-6', artist: 'Rihanna', title: 'Umbrella', year: 2007, youtubeId: 'CvBfHwUxHIk', startAt: 30 },
+  { id: '20s-7', artist: 'Coldplay', title: 'Viva La Vida', year: 2008, youtubeId: 'dvgZkm1xWPE', startAt: 30 },
+  { id: '20s-8', artist: 'Lady Gaga', title: 'Bad Romance', year: 2009, youtubeId: 'qrO4YZeyl0I', startAt: 30 },
+  { id: '20s-9', artist: 'Black Eyed Peas', title: 'I Gotta Feeling', year: 2009, youtubeId: 'uSD4vsh1zDA', startAt: 30 },
+  { id: '20s-10', artist: 'Adele', title: 'Rolling in the Deep', year: 2010, youtubeId: 'rYEDA3JcQqw', startAt: 30 },
+  { id: '20s-11', artist: 'Gotye', title: 'Somebody That I Used To Know', year: 2011, youtubeId: '8UVNT4wvIGY', startAt: 30 },
+  { id: '20s-12', artist: 'Carly Rae Jepsen', title: 'Call Me Maybe', year: 2011, youtubeId: 'fWNaR-rxAic', startAt: 30 },
+  { id: '20s-13', artist: 'Imagine Dragons', title: 'Radioactive', year: 2012, youtubeId: 'w3viBe2Q0P8', startAt: 30 },
+  { id: '20s-14', artist: 'Avicii', title: 'Wake Me Up', year: 2013, youtubeId: 'IcrbM1l_BoI', startAt: 30 },
+  { id: '20s-15', artist: 'Pharrell Williams', title: 'Happy', year: 2013, youtubeId: 'ZbZSe6N_BXs', startAt: 30 },
+  { id: '20s-16', artist: 'Mark Ronson ft. Bruno Mars', title: 'Uptown Funk', year: 2014, youtubeId: 'OPf0YbXqDm0', startAt: 30 },
+  { id: '20s-17', artist: 'Ed Sheeran', title: 'Shape of You', year: 2017, youtubeId: 'JGwWNGJdvx8', startAt: 30 },
+  { id: '20s-18', artist: 'Luis Fonsi', title: 'Despacito', year: 2017, youtubeId: 'kJQP7kiw5Fk', startAt: 30 },
+  { id: '20s-19', artist: 'Billie Eilish', title: 'bad guy', year: 2019, youtubeId: 'DyDfgMOUjCI', startAt: 30 },
+  { id: '20s-20', artist: 'Lil Nas X', title: 'Old Town Road', year: 2019, youtubeId: 'r7qovpFAGrQ', startAt: 30 },
+  { id: '20s-21', artist: 'The Weeknd', title: 'Blinding Lights', year: 2019, youtubeId: '4NRXx6U8ABQ', startAt: 30 },
+  { id: '20s-22', artist: 'Dua Lipa', title: 'Don\'t Start Now', year: 2019, youtubeId: 'oygrmJFKYZY', startAt: 30 },
+  { id: '20s-23', artist: 'Harry Styles', title: 'As It Was', year: 2022, youtubeId: 'H5v3kku4y6Q', startAt: 30 },
+  { id: '20s-24', artist: 'Glass Animals', title: 'Heat Waves', year: 2020, youtubeId: 'mRD0-GxqHVo', startAt: 30 },
+  { id: '20s-25', artist: 'Miley Cyrus', title: 'Flowers', year: 2023, youtubeId: 'G7KNmW9a75Y', startAt: 30 },
+
   // --- 90-LUKU ---
   { id: '90s-1', artist: 'Nirvana', title: 'Smells Like Teen Spirit', year: 1991, youtubeId: 'hTWKbfoikeg', startAt: 0 },
   { id: '90s-2', artist: 'Pearl Jam', title: 'Alive', year: 1991, youtubeId: 'qM0zINtulhM', startAt: 0 },
@@ -107,6 +134,26 @@ export const SONGS: Song[] = [
 ];
 
 export const FINNISH_SONGS: Song[] = [
+  // --- MODERNIT LISÄYKSET ---
+  { id: 'fi-mod-1', artist: 'Käärijä', title: 'Cha Cha Cha', year: 2023, youtubeId: 'l6rS8Dv5g-8', startAt: 30 },
+  { id: 'fi-mod-2', artist: 'KUUMAA', title: 'Ylivoimainen', year: 2023, youtubeId: 'HWJkEnVlfA4', startAt: 30 },
+  { id: 'fi-mod-3', artist: 'BEHM', title: 'Hei rakas', year: 2020, youtubeId: 'C_FNd9iY9EE', startAt: 30 },
+  { id: 'fi-mod-4', artist: 'Blind Channel', title: 'Dark Side', year: 2021, youtubeId: 'fOPGxQ4fgVw', startAt: 30 },
+  { id: 'fi-mod-5', artist: 'Portion Boys', title: 'Samaa taivasta katsotaan', year: 2023, youtubeId: '_iu-uQDefAQ', startAt: 30 },
+  { id: 'fi-mod-6', artist: 'Erika Vikman', title: 'Syntisten pöytä', year: 2020, youtubeId: '6aLb6vJ_TkI', startAt: 30 },
+  { id: 'fi-mod-7', artist: 'Arttu Wiskari', title: 'Tässäkö tää oli?', year: 2020, youtubeId: 'cfAU1Yo3jMA', startAt: 30 },
+  { id: 'fi-mod-8', artist: 'Ville Valo (VV)', title: 'Loveletting', year: 2022, youtubeId: 'CEBug_Pf2MA', startAt: 30 },
+  { id: 'fi-mod-9', artist: 'Sanni', title: '2080-luvulla', year: 2015, youtubeId: 'va_4sd-KATc', startAt: 30 },
+  { id: 'fi-mod-10', artist: 'Mikael Gabriel & Isac Elliot', title: 'Ring Ring Ring', year: 2017, youtubeId: 'Rilru6pWaPM', startAt: 30 },
+  { id: 'fi-mod-11', artist: 'Cheek', title: 'Timantit on ikuisia', year: 2013, youtubeId: '81Ejyr-ddgw', startAt: 30 },
+  { id: 'fi-mod-12', artist: 'Evelina', title: 'Honey', year: 2015, youtubeId: 'n0PhDb81nCM', startAt: 30 },
+  { id: 'fi-mod-13', artist: 'Roope Salminen & Koirat', title: 'Madafakin darra', year: 2015, youtubeId: 'ZMzBrarqlGA', startAt: 30 },
+  { id: 'fi-mod-14', artist: 'Lordi', title: 'Would You Love a Monsterman?', year: 2002, youtubeId: 'uUpuCBTrbKo', startAt: 30 },
+  { id: 'fi-mod-15', artist: 'Nightwish', title: 'Nemo', year: 2004, youtubeId: 'kIBdpFJyFkc', startAt: 30 },
+  { id: 'fi-mod-16', artist: 'HIM', title: 'Join Me in Death', year: 1999, youtubeId: '1V4AscLidWg', startAt: 30 },
+  { id: 'fi-mod-17', artist: 'The Rasmus', title: 'In the Shadows', year: 2003, youtubeId: '7gwO8-oqwFw', startAt: 30 },
+  { id: 'fi-mod-18', artist: 'Bomfunk MC\'s', title: 'Uprocking Beats', year: 1998, youtubeId: 'wLwZx1hyGL8', startAt: 30 },
+
   // --- MODERNIT & 2000-LUKU ---
   { id: 'fi-2', artist: 'Lordi', title: 'Hard Rock Hallelujah', year: 2006, youtubeId: 'gAh9NRGNhUU', startAt: 0 }, // Eurovision Official Live
   { id: 'fi-3', artist: 'Antti Tuisku', title: 'Peto on irti', year: 2015, youtubeId: 'tk5IW-pYZk8', startAt: 0 }, // Official Audio
